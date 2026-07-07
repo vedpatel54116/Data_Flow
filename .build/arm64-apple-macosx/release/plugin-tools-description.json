@@ -1,0 +1,706 @@
+{
+  "builtTestProducts" : [
+
+  ],
+  "copyCommands" : {
+
+  },
+  "explicitTargetDependencyImportCheckingMode" : {
+    "none" : {
+
+    }
+  },
+  "generatedSourceTargetSet" : [
+
+  ],
+  "pluginDescriptions" : [
+
+  ],
+  "swiftCommands" : {
+    "C.EvoFoxRoninMac-arm64-apple-macosx-release.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "fileList" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/sources",
+      "importPath" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/Modules",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/App/EvoFoxRoninMacApp.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Glassmorphism/GlassTokens.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Glassmorphism/GlassView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Glassmorphism/LiquidGlassButton.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Glassmorphism/LiquidGlassCard.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Glassmorphism/LiquidGlassContainer.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Glassmorphism/LiquidGlassSidebar.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Glassmorphism/LiquidGlassToggle.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Glassmorphism/NoiseOverlay.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Glassmorphism/ThemeEnvironment.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Glassmorphism/ThemeSwitcher.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/HID/HIDManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/HID/KeyboardProtocol.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Models/KeyMap.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Models/Profile.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Models/RGBEffect.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Physics/Physics.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Utils/ColorExtensions.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Utils/Logger.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Views/ConnectionView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Views/ContentView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Views/KeyRemapView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Views/KeyboardVisualizer.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Views/MacroEditorView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Views/ProfileManagerView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Views/RGBControlView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/swift-version--58304C5D6DBC2206.txt"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/sources"
+        }
+      ],
+      "isLibrary" : false,
+      "moduleName" : "EvoFoxRoninMac",
+      "moduleOutputPath" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/Modules/EvoFoxRoninMac.swiftmodule",
+      "objects" : [
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/EvoFoxRoninMacApp.swift.o",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/GlassTokens.swift.o",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/GlassView.swift.o",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/LiquidGlassButton.swift.o",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/LiquidGlassCard.swift.o",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/LiquidGlassContainer.swift.o",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/LiquidGlassSidebar.swift.o",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/LiquidGlassToggle.swift.o",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/NoiseOverlay.swift.o",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/ThemeEnvironment.swift.o",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/ThemeSwitcher.swift.o",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/HIDManager.swift.o",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/KeyboardProtocol.swift.o",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/KeyMap.swift.o",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/Profile.swift.o",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/RGBEffect.swift.o",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/Physics.swift.o",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/ColorExtensions.swift.o",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/Logger.swift.o",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/ConnectionView.swift.o",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/ContentView.swift.o",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/KeyRemapView.swift.o",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/KeyboardVisualizer.swift.o",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/MacroEditorView.swift.o",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/ProfileManagerView.swift.o",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/RGBControlView.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "arm64-apple-macosx14.0",
+        "-whole-module-optimization",
+        "-num-threads",
+        "10",
+        "-serialize-diagnostics",
+        "-O",
+        "-j10",
+        "-DSWIFT_PACKAGE",
+        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+        "-module-cache-path",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/ModuleCache",
+        "-parseable-output",
+        "-Xfrontend",
+        "-entry-point-function-name",
+        "-Xfrontend",
+        "EvoFoxRoninMac_main",
+        "-swift-version",
+        "5",
+        "-plugin-path",
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-g",
+        "-Xcc",
+        "-isysroot",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
+        "-Xcc",
+        "-F",
+        "-Xcc",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-Xcc",
+        "-fPIC",
+        "-Xcc",
+        "-g",
+        "-package-name",
+        "evofoxroninmac"
+      ],
+      "outputFileMapPath" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/output-file-map.json",
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/EvoFoxRoninMacApp.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/GlassTokens.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/GlassView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/LiquidGlassButton.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/LiquidGlassCard.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/LiquidGlassContainer.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/LiquidGlassSidebar.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/LiquidGlassToggle.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/NoiseOverlay.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/ThemeEnvironment.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/ThemeSwitcher.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/HIDManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/KeyboardProtocol.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/KeyMap.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/Profile.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/RGBEffect.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/Physics.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/ColorExtensions.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/Logger.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/ConnectionView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/ContentView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/KeyRemapView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/KeyboardVisualizer.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/MacroEditorView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/ProfileManagerView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/RGBControlView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/Modules/EvoFoxRoninMac.swiftmodule"
+        }
+      ],
+      "prepareForIndexing" : false,
+      "sources" : [
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/App/EvoFoxRoninMacApp.swift",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Glassmorphism/GlassTokens.swift",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Glassmorphism/GlassView.swift",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Glassmorphism/LiquidGlassButton.swift",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Glassmorphism/LiquidGlassCard.swift",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Glassmorphism/LiquidGlassContainer.swift",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Glassmorphism/LiquidGlassSidebar.swift",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Glassmorphism/LiquidGlassToggle.swift",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Glassmorphism/NoiseOverlay.swift",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Glassmorphism/ThemeEnvironment.swift",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Glassmorphism/ThemeSwitcher.swift",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/HID/HIDManager.swift",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/HID/KeyboardProtocol.swift",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Models/KeyMap.swift",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Models/Profile.swift",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Models/RGBEffect.swift",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Physics/Physics.swift",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Utils/ColorExtensions.swift",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Utils/Logger.swift",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Views/ConnectionView.swift",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Views/ContentView.swift",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Views/KeyRemapView.swift",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Views/KeyboardVisualizer.swift",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Views/MacroEditorView.swift",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Views/ProfileManagerView.swift",
+        "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Views/RGBControlView.swift"
+      ],
+      "tempsPath" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build",
+      "wholeModuleOptimization" : true
+    }
+  },
+  "swiftFrontendCommands" : {
+
+  },
+  "swiftTargetScanArgs" : {
+    "EvoFoxRoninMac" : [
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "-module-name",
+      "EvoFoxRoninMac",
+      "-package-name",
+      "evofoxroninmac",
+      "-c",
+      "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/App/EvoFoxRoninMacApp.swift",
+      "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Glassmorphism/GlassTokens.swift",
+      "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Glassmorphism/GlassView.swift",
+      "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Glassmorphism/LiquidGlassButton.swift",
+      "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Glassmorphism/LiquidGlassCard.swift",
+      "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Glassmorphism/LiquidGlassContainer.swift",
+      "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Glassmorphism/LiquidGlassSidebar.swift",
+      "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Glassmorphism/LiquidGlassToggle.swift",
+      "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Glassmorphism/NoiseOverlay.swift",
+      "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Glassmorphism/ThemeEnvironment.swift",
+      "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Glassmorphism/ThemeSwitcher.swift",
+      "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/HID/HIDManager.swift",
+      "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/HID/KeyboardProtocol.swift",
+      "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Models/KeyMap.swift",
+      "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Models/Profile.swift",
+      "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Models/RGBEffect.swift",
+      "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Physics/Physics.swift",
+      "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Utils/ColorExtensions.swift",
+      "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Utils/Logger.swift",
+      "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Views/ConnectionView.swift",
+      "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Views/ContentView.swift",
+      "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Views/KeyRemapView.swift",
+      "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Views/KeyboardVisualizer.swift",
+      "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Views/MacroEditorView.swift",
+      "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Views/ProfileManagerView.swift",
+      "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Views/RGBControlView.swift",
+      "-I",
+      "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/Modules",
+      "-target",
+      "arm64-apple-macosx14.0",
+      "-whole-module-optimization",
+      "-num-threads",
+      "10",
+      "-serialize-diagnostics",
+      "-O",
+      "-j10",
+      "-DSWIFT_PACKAGE",
+      "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
+      "-module-cache-path",
+      "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/ModuleCache",
+      "-parseable-output",
+      "-Xfrontend",
+      "-entry-point-function-name",
+      "-Xfrontend",
+      "EvoFoxRoninMac_main",
+      "-swift-version",
+      "5",
+      "-plugin-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins/testing",
+      "-sdk",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
+      "-F",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-I",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-L",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+      "-g",
+      "-Xcc",
+      "-isysroot",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.5.sdk",
+      "-Xcc",
+      "-F",
+      "-Xcc",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+      "-Xcc",
+      "-fPIC",
+      "-Xcc",
+      "-g",
+      "-package-name",
+      "evofoxroninmac",
+      "-driver-use-frontend-path",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+    ]
+  },
+  "targetDependencyMap" : {
+    "EvoFoxRoninMac" : [
+
+    ]
+  },
+  "testDiscoveryCommands" : {
+
+  },
+  "testEntryPointCommands" : {
+
+  },
+  "traitConfiguration" : {
+    "default" : {
+
+    }
+  },
+  "writeCommands" : {
+    "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/sources" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<sources-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/App/EvoFoxRoninMacApp.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Glassmorphism/GlassTokens.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Glassmorphism/GlassView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Glassmorphism/LiquidGlassButton.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Glassmorphism/LiquidGlassCard.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Glassmorphism/LiquidGlassContainer.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Glassmorphism/LiquidGlassSidebar.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Glassmorphism/LiquidGlassToggle.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Glassmorphism/NoiseOverlay.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Glassmorphism/ThemeEnvironment.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Glassmorphism/ThemeSwitcher.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/HID/HIDManager.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/HID/KeyboardProtocol.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Models/KeyMap.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Models/Profile.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Models/RGBEffect.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Physics/Physics.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Utils/ColorExtensions.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Utils/Logger.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Views/ConnectionView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Views/ContentView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Views/KeyRemapView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Views/KeyboardVisualizer.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Views/MacroEditorView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Views/ProfileManagerView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/Sources/EvoFoxRoninMac/Views/RGBControlView.swift"
+        }
+      ],
+      "outputFilePath" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/sources"
+    },
+    "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.product/Objects.LinkFileList" : {
+      "alwaysOutOfDate" : false,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<link-file-list>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/ColorExtensions.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/ConnectionView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/ContentView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/EvoFoxRoninMacApp.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/GlassTokens.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/GlassView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/HIDManager.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/KeyMap.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/KeyRemapView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/KeyboardProtocol.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/KeyboardVisualizer.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/LiquidGlassButton.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/LiquidGlassCard.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/LiquidGlassContainer.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/LiquidGlassSidebar.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/LiquidGlassToggle.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/Logger.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/MacroEditorView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/NoiseOverlay.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/Physics.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/Profile.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/ProfileManagerView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/RGBControlView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/RGBEffect.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/ThemeEnvironment.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.build/ThemeSwitcher.swift.o"
+        }
+      ],
+      "outputFilePath" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/EvoFoxRoninMac.product/Objects.LinkFileList"
+    },
+    "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/swift-version--58304C5D6DBC2206.txt" : {
+      "alwaysOutOfDate" : true,
+      "inputs" : [
+        {
+          "kind" : "virtual",
+          "name" : "<swift-get-version>"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc"
+        }
+      ],
+      "outputFilePath" : "/Users/vedpatelicloud.com/Documents/app/EvoFoxRoninMac/.build/arm64-apple-macosx/release/swift-version--58304C5D6DBC2206.txt"
+    }
+  }
+}
