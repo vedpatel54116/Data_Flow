@@ -29,53 +29,65 @@ struct EvoFoxRoninMacApp: App {
             ContentView()
                 .environment(hidManager)
                 .environment(profileManager)
+                .environment(\.layoutDirection, .leftToRight)
                 .frame(minWidth: 1100, minHeight: 720)
                 .onAppear {
                     Logger.debug("EvoFoxRoninMacApp body onAppear — hidManager instance: \(Unmanaged.passUnretained(hidManager).toOpaque())")
-                }
-        }
+    }
+}
+
+// MARK: - Notification for Shortcut Cheat Sheet
+
+extension Notification.Name {
+    static let showShortcutCheatSheet = Notification.Name("com.evofox.ronin.showShortcutCheatSheet")
+}
         .windowStyle(.hiddenTitleBar)
         .windowResizability(.contentSize)
         .commands {
-            CommandMenu("Keyboard") {
-                Button("Connect") {
+            CommandMenu("app.menu.keyboard") {
+                Button("app.menu.connect") {
                     hidManager.connect()
                 }
                 .keyboardShortcut("K", modifiers: .command)
 
-                Button("Disconnect") {
+                Button("app.menu.disconnect") {
                     hidManager.disconnect()
                 }
                 .keyboardShortcut("D", modifiers: [.command, .shift])
 
                 Divider()
 
-                Button("Enable Mock Mode") {
+                Button("app.menu.enableMock") {
                     hidManager.enableMockMode()
                 }
 
-                Button("Disable Mock Mode") {
+                Button("app.menu.disableMock") {
                     hidManager.disableMockMode()
                 }
+
+                Divider()
+
+                Button("app.menu.shortcuts") {
+                    NotificationCenter.default.post(name: .showShortcutCheatSheet, object: nil)
+                }
+                .keyboardShortcut("?", modifiers: .command)
             }
 
-            CommandMenu("Profile") {
-                Button("New Profile") {
-                    // Trigger new profile creation
+            CommandMenu("app.menu.profile") {
+                Button("app.menu.newProfile") {
                 }
                 .keyboardShortcut("N", modifiers: [.command, .shift])
 
-                Button("Save to Keyboard") {
-                    // Save active profile to keyboard memory
+                Button("app.menu.saveToKeyboard") {
                 }
                 .keyboardShortcut("S", modifiers: [.command, .shift])
             }
         }
 
         #if os(macOS)
-        MenuBarExtra("EvoFox Ronin", systemImage: "keyboard.fill") {
+        MenuBarExtra("app.menubar.title", systemImage: "keyboard.fill") {
             VStack {
-                Text("EvoFox Ronin Controller")
+                Text("app.menubar.controller")
                     .font(.headline)
                 Text(hidManager.connectionState.displayText)
                     .font(.caption)
@@ -83,7 +95,7 @@ struct EvoFoxRoninMacApp: App {
 
                 Divider()
 
-                Button("Open Window") {
+                Button("app.menubar.openWindow") {
                     NSApplication.shared.activate(ignoringOtherApps: true)
                     if let window = NSApplication.shared.windows.first {
                         window.makeKeyAndOrderFront(nil)
@@ -93,25 +105,25 @@ struct EvoFoxRoninMacApp: App {
 
                 Divider()
 
-                Button("Connect") {
+                Button("app.menu.connect") {
                     hidManager.connect()
                 }
                 .disabled(hidManager.connectionState.isConnected)
 
-                Button("Disconnect") {
+                Button("app.menu.disconnect") {
                     hidManager.disconnect()
                 }
                 .disabled(!hidManager.connectionState.isConnected)
 
                 Divider()
 
-                Button("Start at Login") {
+                Button("app.menubar.startAtLogin") {
                     toggleStartAtLogin()
                 }
 
                 Divider()
 
-                Button("Quit") {
+                Button("app.menubar.quit") {
                     NSApplication.shared.terminate(nil)
                 }
                 .keyboardShortcut("Q", modifiers: .command)
@@ -160,27 +172,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func checkInputMonitoringPermission() {
-        // macOS requires Input Monitoring permission for HID device access.
-        // We test by attempting to open an IOHIDManager — if permission is denied,
-        // IOHIDManagerOpen returns kIOReturnNotPermitted.
-        let manager = IOHIDManagerCreate(kCFAllocatorDefault, IOOptionBits(kIOHIDOptionsTypeNone))
-        IOHIDManagerSetDeviceMatching(manager, nil)
-        
-        guard let runLoop = CFRunLoopGetMain() else { return }
-        IOHIDManagerScheduleWithRunLoop(manager, runLoop, CFRunLoopMode.defaultMode.rawValue)
-        
-        let result = IOHIDManagerOpen(manager, IOOptionBits(kIOHIDOptionsTypeNone))
-        
-        if result == kIOReturnSuccess {
-            Logger.info("Input Monitoring permission: GRANTED")
-            IOHIDManagerClose(manager, IOOptionBits(kIOHIDOptionsTypeNone))
-        } else if result == kIOReturnNotPermitted {
-            Logger.warning("Input Monitoring permission: NOT GRANTED")
-            // Show system prompt for Input Monitoring permission
-            let options = [kAXTrustedCheckOptionPrompt.takeUnretainedValue(): true] as CFDictionary
-            AXIsProcessTrustedWithOptions(options)
-        } else {
-            Logger.warning("HID Manager open failed with code: 0x\(String(format: "%08X", result))")
+        Task {
+            let status = await PermissionManager.shared.requestInputMonitoring()
+            switch status {
+            case .granted:
+                Logger.info("Input Monitoring permission: GRANTED via PermissionManager")
+            case .denied:
+                Logger.warning("Input Monitoring permission: DENIED via PermissionManager")
+            case .notDetermined, .unknown:
+                Logger.info("Input Monitoring permission: status=\(status)")
+            }
         }
     }
 }
