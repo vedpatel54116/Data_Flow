@@ -1,1 +1,17 @@
 .build/
+.swiftpm/
+*.xcodeproj/xcuserdata/
+*.xcworkspace/xcuserdata/
+*.swp
+*.swo
+*~
+.DS_Store
+*.swiftdoc
+*.swiftmodule
+*.pcm
+*.o
+*.a
+*.dylib
+*.dSYM/
+.release/
+.debug/
