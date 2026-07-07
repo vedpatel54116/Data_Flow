@@ -21,13 +21,27 @@ import AppKit
 import UniformTypeIdentifiers
 
 enum SidebarItem: String, CaseIterable, Identifiable {
-    case connection = "Connection"
-    case rgb = "RGB Lighting"
-    case remap = "Key Remap"
-    case macros = "Macros"
-    case profiles = "Profiles"
+    case connection
+    case rgb
+    case remap
+    case macros
+    case knob
+    case polling
+    case profiles
 
     var id: String { rawValue }
+
+    var localizedKey: LocalizedStringKey {
+        switch self {
+        case .connection: return "sidebar.connection"
+        case .rgb: return "sidebar.rgb"
+        case .remap: return "sidebar.remap"
+        case .macros: return "sidebar.macros"
+        case .knob: return "sidebar.knob"
+        case .polling: return "sidebar.polling"
+        case .profiles: return "sidebar.profiles"
+        }
+    }
 
     var icon: String {
         switch self {
@@ -35,6 +49,8 @@ enum SidebarItem: String, CaseIterable, Identifiable {
         case .rgb: return "lightbulb.fill"
         case .remap: return "keyboard.fill"
         case .macros: return "record.circle.fill"
+        case .knob: return "knob"
+        case .polling: return "gauge.with.dots.needle.33percent"
         case .profiles: return "square.stack.3d.up.fill"
         }
     }
@@ -47,6 +63,9 @@ struct ContentView: View {
     @State private var selectedItem: SidebarItem = .connection
     @State private var showKnobSettings = false
     @State private var showPollingRateSettings = false
+    @State private var showOnboarding = false
+    @State private var showShortcutCheatSheet = false
+    @State private var showWhatsNew = false
 
     @Namespace private var animation
 
@@ -70,6 +89,36 @@ struct ContentView: View {
         .onAppear {
             Logger.debug("ContentView.onAppear — calling hidManager.connect()")
             hidManager.connect()
+
+            if !UserDefaults.standard.bool(forKey: "hasCompletedOnboarding") {
+                showOnboarding = true
+            }
+
+            if WhatsNewManager.shouldShow {
+                showWhatsNew = true
+            }
+
+            NotificationCenter.default.addObserver(
+                forName: .showShortcutCheatSheet,
+                object: nil,
+                queue: .main
+            ) { _ in
+                showShortcutCheatSheet = true
+            }
+        }
+        .sheet(isPresented: $showOnboarding) {
+            OnboardingView()
+                .environment(hidManager)
+        }
+        .sheet(isPresented: $showShortcutCheatSheet) {
+            ShortcutCheatSheet()
+        }
+        .sheet(isPresented: $showWhatsNew) {
+            let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0"
+            WhatsNewSheet(version: version)
+                .onDisappear {
+                    WhatsNewManager.markSeen()
+                }
         }
     }
 
@@ -110,7 +159,7 @@ struct ContentView: View {
                             selectedItem = item
                         }
                     }
-                    .help(item.rawValue)
+                    .help(item.localizedKey)
                 }
             }
 
@@ -125,7 +174,7 @@ struct ContentView: View {
                         .vibrantText(isSecondary: true)
                 }
                 .buttonStyle(PlainButtonStyle())
-                .help("Configure Volume Knob")
+                .help("knob.title")
 
                 Button(action: { showPollingRateSettings = true }) {
                     Image(systemName: "gauge.with.dots.needle.33percent")
@@ -133,7 +182,7 @@ struct ContentView: View {
                         .vibrantText(isSecondary: true)
                 }
                 .buttonStyle(PlainButtonStyle())
-                .help("Configure Polling Rate")
+                .help("polling.title")
 
                 Divider()
                     .frame(width: 24)
@@ -198,6 +247,10 @@ struct ContentView: View {
                     KeyRemapView()
                 case .macros:
                     MacroEditorView()
+                case .knob:
+                    KnobSettingsPanel()
+                case .polling:
+                    PollingRatePanel()
                 case .profiles:
                     ProfileManagerView()
                 }
@@ -223,9 +276,9 @@ struct ContentView: View {
     private var connectionStatusText: String {
         switch hidManager.connectionState {
         case .connected(let name): return name
-        case .connecting: return "Connecting..."
-        case .scanning: return "Scanning..."
-        case .disconnected: return "Disconnected"
+        case .connecting: return String(localized: "connection.status.connectingShort")
+        case .scanning: return String(localized: "connection.status.scanningShort")
+        case .disconnected: return String(localized: "connection.status.disconnectedShort")
         case .error(let error): return error.description
         }
     }
@@ -247,7 +300,8 @@ struct NavPillButton: View {
             withAnimation(.spring(response: 0.13, dampingFraction: 0.5)) {
                 isPressed = true
             }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.13) {
+            Task { @MainActor in
+                try? await Task.sleep(nanoseconds: 130_000_000)
                 withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
                     isPressed = false
                 }
@@ -275,6 +329,98 @@ struct NavPillButton: View {
                 isHovered = hovering
             }
         }
+        .accessibilityLabel(item.localizedKey)
+        .accessibilityValue(isSelected ? "nav.active" : "nav.notActive")
+    }
+}
+
+// MARK: - Knob Settings Panel
+
+private struct KnobSettingsPanel: View {
+    @Environment(ProfileManager.self) private var profileManager
+
+    var body: some View {
+        VStack(spacing: 24) {
+            HStack {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("knob.title")
+                        .font(.system(size: 24, weight: .bold, design: .rounded))
+                        .vibrantText()
+
+                    Text("knob.subtitle")
+                        .font(.system(size: 14, weight: .regular))
+                        .vibrantText(isSecondary: true)
+                }
+                Spacer()
+            }
+
+            LiquidGlassCard {
+                VStack(spacing: 16) {
+                    if let profile = profileManager.activeProfile {
+                        KnobSettingsView(knobBehavior: Binding(
+                            get: { profile.knobBehavior },
+                            set: { newValue in
+                                var updated = profile
+                                updated.knobBehavior = newValue
+                                profileManager.updateProfile(updated)
+                            }
+                        ))
+                        .environment(profileManager)
+                    } else {
+                        Text("general.noActiveProfile")
+                            .vibrantText(isSecondary: true)
+                    }
+                }
+            }
+
+            Spacer(minLength: 40)
+        }
+        .frame(maxWidth: 800)
+    }
+}
+
+// MARK: - Polling Rate Panel
+
+private struct PollingRatePanel: View {
+    @Environment(ProfileManager.self) private var profileManager
+
+    var body: some View {
+        VStack(spacing: 24) {
+            HStack {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("polling.title")
+                        .font(.system(size: 24, weight: .bold, design: .rounded))
+                        .vibrantText()
+
+                    Text("polling.subtitle")
+                        .font(.system(size: 14, weight: .regular))
+                        .vibrantText(isSecondary: true)
+                }
+                Spacer()
+            }
+
+            LiquidGlassCard {
+                VStack(spacing: 16) {
+                    if let profile = profileManager.activeProfile {
+                        PollingRateView(pollingRate: Binding(
+                            get: { profile.pollingRate },
+                            set: { newValue in
+                                var updated = profile
+                                updated.pollingRate = newValue
+                                profileManager.updateProfile(updated)
+                            }
+                        ))
+                        .environment(profileManager)
+                    } else {
+                        Text("general.noActiveProfile")
+                            .vibrantText(isSecondary: true)
+                    }
+                }
+            }
+
+            Spacer(minLength: 40)
+        }
+        .frame(maxWidth: 800)
     }
 }
 
