@@ -314,13 +314,13 @@ public struct LiquidToggle: View {
         }
         
         // Release after a short delay (matching JS keyup behavior)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        Task { @MainActor in
+            try? await Task.sleep(nanoseconds: 100_000_000)
             isPressed = false
-            DispatchQueue.main.asyncAfter(deadline: .now() + LiquidPhysics.releaseDelay) {
-                isOn.toggle()
-                withAnimation(.easeOut(duration: 0.2)) {
-                    isActive = false
-                }
+            try? await Task.sleep(nanoseconds: UInt64(LiquidPhysics.releaseDelay * 1_000_000_000))
+            isOn.toggle()
+            withAnimation(.easeOut(duration: 0.2)) {
+                isActive = false
             }
         }
     }
@@ -377,7 +377,8 @@ public struct LiquidToggle: View {
             }
             
             // Match JS delay for state updates
-            DispatchQueue.main.asyncAfter(deadline: .now() + LiquidPhysics.releaseDelay) {
+            Task { @MainActor in
+                try? await Task.sleep(nanoseconds: UInt64(LiquidPhysics.releaseDelay * 1_000_000_000))
                 isOn = target == 100
                 withAnimation(.easeOut(duration: 0.2)) {
                     isActive = false
@@ -403,7 +404,8 @@ public struct LiquidToggle: View {
             complete = isOn ? 0 : 100
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + LiquidPhysics.releaseDelay) {
+        Task { @MainActor in
+            try? await Task.sleep(nanoseconds: UInt64(LiquidPhysics.releaseDelay * 1_000_000_000))
             isOn.toggle()
             withAnimation(.easeOut(duration: 0.2)) {
                 isActive = false

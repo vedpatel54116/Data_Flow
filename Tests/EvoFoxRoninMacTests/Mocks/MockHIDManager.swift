@@ -1,12 +1,13 @@
 import Foundation
 @testable import EvoFoxRoninMac
 
-class MockHIDManager: HIDManager, @unchecked Sendable {
+@MainActor
+class MockHIDManager: HIDManager {
     var sentReports: [[UInt8]] = []
     var shouldSucceed: Bool = true
     var mockError: HIDError?
 
-    init() {
+    override init() {
         super.init(mockMode: true)
     }
 

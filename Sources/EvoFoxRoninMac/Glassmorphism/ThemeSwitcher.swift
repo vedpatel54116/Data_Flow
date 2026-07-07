@@ -19,9 +19,9 @@ public enum AppTheme: String, CaseIterable, Identifiable {
 
     public var displayName: String {
         switch self {
-        case .light: return "Light"
-        case .dark: return "Dark"
-        case .dim: return "Dim"
+        case .light: return String(localized: "theme.light")
+        case .dark: return String(localized: "theme.dark")
+        case .dim: return String(localized: "theme.dim")
         }
     }
 
@@ -94,16 +94,14 @@ public final class ThemeManager {
     }
 
     private func applyTheme() {
-        DispatchQueue.main.async {
-            NSApp.windows.forEach { window in
-                switch self.currentTheme {
-                case .light:
-                    window.appearance = NSAppearance(named: .aqua)
-                case .dark:
-                    window.appearance = NSAppearance(named: .darkAqua)
-                case .dim:
-                    window.appearance = NSAppearance(named: .darkAqua)
-                }
+        NSApp.windows.forEach { window in
+            switch self.currentTheme {
+            case .light:
+                window.appearance = NSAppearance(named: .aqua)
+            case .dark:
+                window.appearance = NSAppearance(named: .darkAqua)
+            case .dim:
+                window.appearance = NSAppearance(named: .darkAqua)
             }
         }
     }
@@ -136,9 +134,9 @@ public struct ThemeSwitcher: View {
 
     public var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Appearance")
+            Text("theme.appearance")
                 .font(.system(size: 11, weight: .semibold, design: .rounded))
-                .themeText(.secondary)
+                .glassText(.secondary)
                 .tracking(0.5)
                 .textCase(.uppercase)
                 .padding(.horizontal, 4)
@@ -326,13 +324,14 @@ public struct ThemeSwitcher: View {
         }
         .buttonStyle(.plain)
         .help(theme.displayName)
-        .accessibilityLabel("Switch to \(theme.displayName) theme")
+        .accessibilityLabel(String(localized: "theme.switch \(theme.displayName)"))
         .accessibilityAddTraits(isSelected ? .isSelected : [])
     }
 
     private func triggerRipple() {
         isAnimating = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+        Task { @MainActor in
+            try? await Task.sleep(nanoseconds: 400_000_000)
             isAnimating = false
         }
     }
@@ -382,7 +381,7 @@ public struct CompactThemeSwitcher: View {
                 }
             }
             .buttonStyle(.plain)
-            .help("Current: \(themeManager.currentTheme.displayName). Click to cycle.")
+            .help(String(localized: "theme.help \(themeManager.currentTheme.displayName)"))
 
             // Expanded options
             if isExpanded {

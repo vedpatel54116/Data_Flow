@@ -1,34 +1,53 @@
-/**
- HIDManager.swift
-
- Handles USB HID communication with the EvoFox Ronin keyboard using IOKit.
-
- Discovery strategy (in order of priority):
- 1. Match by known EvoFox/Amkette vendor IDs (0x258A, 0x0483, 0x0C45)
- 2. Match by product name containing "EvoFox", "Ronin", "Amkette"
- 3. Match by any gaming keyboard vendor (broad VID list)
- 4. Enumerate ALL HID devices and show them in logs so user can identify
-
- Usage Page / Usage note:
- - The keyboard keys interface: UsagePage=0x01, Usage=0x06 (Generic Desktop / Keyboard)
- - The RGB control interface often uses: UsagePage=0xFF00+ (vendor-defined)
- - Some keyboards expose BOTH interfaces; we need to match the right one
- - We enumerate ALL HID devices and filter by properties, not by usage
-
- To identify your keyboard's VID/PID:
- 1. Connect the keyboard
- 2. Run the app and check logs (Console app or Xcode console)
- 3. Look for lines like: "Found HID: name=..., vid=0xXXXX, pid=0xYYYY"
- 4. Update the known vendor/product lists below
-*/
-
 import Foundation
 import IOKit
 import IOKit.hid
 import Combine
 import ApplicationServices
 
-public enum HIDConnectionState: Equatable {
+// MARK: - HID Global Actor
+
+@globalActor
+public actor HIDActor {
+    public static let shared = HIDActor()
+}
+
+// MARK: - HID Event Stream (AsyncSequence)
+
+public struct HIDEvent: Sendable {
+    public let data: Data
+    public let timestamp: Date
+}
+
+public struct HIDEventStream: AsyncSequence {
+    public typealias Element = HIDEvent
+
+    private let stream: AsyncStream<HIDEvent>
+    private let continuation: AsyncStream<HIDEvent>.Continuation
+
+    public init() {
+        var cont: AsyncStream<HIDEvent>.Continuation!
+        stream = AsyncStream { continuation in
+            cont = continuation
+        }
+        continuation = cont
+    }
+
+    public func makeAsyncIterator() -> AsyncStream<HIDEvent>.Iterator {
+        stream.makeAsyncIterator()
+    }
+
+    public func emit(_ event: HIDEvent) {
+        continuation.yield(event)
+    }
+
+    public func finish() {
+        continuation.finish()
+    }
+}
+
+// MARK: - Connection State
+
+public enum HIDConnectionState: Equatable, Sendable {
     case disconnected
     case scanning
     case connecting
@@ -51,7 +70,9 @@ public enum HIDConnectionState: Equatable {
     }
 }
 
-public enum HIDError: Error, Equatable {
+// MARK: - Error Type
+
+public enum HIDError: Error, Equatable, Sendable {
     case deviceNotFound
     case permissionDenied
     case connectionFailed
@@ -60,6 +81,7 @@ public enum HIDError: Error, Equatable {
     case invalidReportSize(actual: Int, expected: Int)
     case timeout
     case sendFailed(IOReturn)
+    case invalidResponse
     case unknown
 
     public var description: String {
@@ -72,13 +94,22 @@ public enum HIDError: Error, Equatable {
         case .invalidReportSize(let actual, let expected): return "Invalid HID report size: got \(actual), expected \(expected)."
         case .timeout: return "Communication timeout."
         case .sendFailed(let ret): return "HID send failed with code: 0x\(String(format: "%08X", ret))."
+        case .invalidResponse: return "Invalid response from keyboard."
         case .unknown: return "Unknown HID error."
+        }
+    }
+
+    public var isRetryable: Bool {
+        switch self {
+        case .timeout, .connectionFailed, .sendFailed: return true
+        default: return false
         }
     }
 }
 
-/// Discovered device info for logging and diagnostics
-public struct HIDDeviceInfo: Identifiable {
+// MARK: - Device Info
+
+public struct HIDDeviceInfo: Identifiable, Sendable {
     public let id = UUID()
     public let name: String
     public let vendorID: Int
@@ -88,72 +119,55 @@ public struct HIDDeviceInfo: Identifiable {
     public let reportSize: Int
     public let transport: String
     public let manufacturer: String
+
+    /// Whether this device is likely an RGB-capable keyboard based on usage page
+    public var hasRGBCapability: Bool {
+        usagePage >= 0xFF00 || usagePage == 0x01
+    }
 }
 
+// MARK: - HID Manager
+
+@MainActor
 @Observable
-open class HIDManager: @unchecked Sendable {
-    public var connectionState: HIDConnectionState {
-        get { stateLock.withLock { _connectionState } }
-        set { stateLock.withLock { _connectionState = newValue } }
-    }
-    public var isMockMode: Bool {
-        get { stateLock.withLock { _isMockMode } }
-        set { stateLock.withLock { _isMockMode = newValue } }
-    }
-    public var discoveredDevices: [HIDDeviceInfo] {
-        get { stateLock.withLock { _discoveredDevices } }
-        set { stateLock.withLock { _discoveredDevices = newValue } }
-    }
+open class HIDManager {
+    public var connectionState: HIDConnectionState = .disconnected
+    public var isMockMode: Bool = false
+    public var discoveredDevices: [HIDDeviceInfo] = []
 
-    private var _connectionState: HIDConnectionState = .disconnected
-    private var _isMockMode: Bool = false
-    private var _discoveredDevices: [HIDDeviceInfo] = []
+    // IOKit handles are not Sendable, use nonisolated(unsafe) for C interop
+    private nonisolated(unsafe) var hidManager: IOHIDManager?
+    private nonisolated(unsafe) var device: IOHIDDevice?
+    private nonisolated(unsafe) var reportSize: Int = 64
+    private nonisolated(unsafe) var inputBuffer: UnsafeMutablePointer<UInt8>?
+    private nonisolated(unsafe) var pendingManager: IOHIDManager?
 
-    private var hidManager: IOHIDManager?
-    private var device: IOHIDDevice?
-    private var reportSize: Int = 64
-    private var inputBuffer: UnsafeMutablePointer<UInt8>?
-    private let stateLock = NSLock()
-    private let hidQueue = DispatchQueue(label: "com.evofox.ronin.hid", qos: .userInitiated)
-    
+    // Async sequence for HID input events
+    public nonisolated(unsafe) let eventStream = HIDEventStream()
+
     // MARK: - Instance Tracking for Callback Safety
     private static let activeInstanceLock = NSLock()
     private static weak var activeInstance: HIDManager?
-    
-    /// Returns the currently active HIDManager instance, if any
+
     public static func getActiveInstance() -> HIDManager? {
         activeInstanceLock.withLock { activeInstance }
     }
 
     // Known EvoFox / Amkette / common OEM vendor IDs
-    private let knownVendorIDs: [Int] = [
-        0x320F,  // Evision / Ajazz (EvoFox Ronin TKL)
-        0x258A,  // Apex Gaming / various OEM
-        0x0483,  // STMicroelectronics
-        0x0C45,  // Sonix Technology
-        0x04D9,  // Holtek
-        0x060B,  // Ducky
-        0x0461,  // Primax
-        0x2516,  // Cooler Master
-        0x1532,  // Razer
-        0x25A7,  // Areson / generic OEM
-        0x093A,  // Pixart Imaging
-        0x1BCF,  // Sunrex Technology
-        0x24AE,  // Rapoo
-        0x28AB,  // Shenzhen X-Keys
+    private nonisolated(unsafe) let knownVendorIDs: [Int] = [
+        0x320F, 0x258A, 0x0483, 0x0C45, 0x04D9,
+        0x060B, 0x0461, 0x2516, 0x1532, 0x25A7,
+        0x093A, 0x1BCF, 0x24AE, 0x28AB,
     ]
 
-    // Known EvoFox / Amkette product name keywords
-    private let knownNameKeywords = [
+    private nonisolated(unsafe) let knownNameKeywords = [
         "evofox", "ronin", "amkette", "amk", "evision",
         "gaming keyboard", "mechanical keyboard",
         "usb keyboard", "hid keyboard",
     ]
 
-    // Common gaming keyboard PIDs to try
-    private let knownProductIDs: [Int] = [
-        0x5055,  // EvoFox Ronin TKL Wired
-        0x0049, 0x004A, 0x004B, 0x004C,
+    private nonisolated(unsafe) let knownProductIDs: [Int] = [
+        0x5055, 0x0049, 0x004A, 0x004B, 0x004C,
         0x0001, 0x0002, 0x0003, 0x0004,
         0x1001, 0x1002, 0x1003, 0x1004,
         0x0200, 0x0201, 0x0202, 0x0203,
@@ -165,34 +179,26 @@ open class HIDManager: @unchecked Sendable {
         if mockMode {
             connectionState = .connected(deviceName: "EvoFox Ronin (Mock Mode)")
         }
-        // Track this instance for callback safety
         HIDManager.activeInstanceLock.withLock {
             HIDManager.activeInstance = self
         }
-        // NOTE: We do NOT call setupHIDManager() here anymore.
-        // IOKit manager is created lazily on first connect() to ensure
-        // it's fully ready and avoid lifecycle issues with @State.
     }
 
     deinit {
-        hidQueue.sync { [self] in
-            shutdownHIDManager()
-        }
+        shutdownHIDManager()
     }
 
-    private func shutdownHIDManager() {
+    private nonisolated func shutdownHIDManager() {
         if let device = device {
             IOHIDDeviceClose(device, IOOptionBits(kIOHIDOptionsTypeNone))
-            self.device = nil
         }
         if let manager = hidManager {
             IOHIDManagerClose(manager, IOOptionBits(kIOHIDOptionsTypeNone))
-            hidManager = nil
         }
         if let buf = inputBuffer {
             buf.deallocate()
-            inputBuffer = nil
         }
+        eventStream.finish()
     }
 
     // MARK: - Connection
@@ -208,42 +214,37 @@ open class HIDManager: @unchecked Sendable {
         connectionState = .scanning
         discoveredDevices = []
 
-        hidQueue.async { [weak self] in
-            guard let self = self else { return }
-            // Close previous manager if any to prevent resource leak
-            stateLock.withLock {
-                if let oldManager = self.hidManager {
-                    IOHIDManagerClose(oldManager, IOOptionBits(kIOHIDOptionsTypeNone))
-                    self.hidManager = nil
-                }
-                self.device = nil
-            }
-            doConnect()
+        // Close previous manager synchronously on MainActor
+        if let oldManager = hidManager {
+            IOHIDManagerClose(oldManager, IOOptionBits(kIOHIDOptionsTypeNone))
+            hidManager = nil
+        }
+        device = nil
+
+        Task.detached(priority: .userInitiated) { [weak self] in
+            await self?.doConnect()
         }
     }
 
-    private func doConnect() {
+    private nonisolated func doConnect() async {
         Logger.info("Starting background device scan and connection")
 
-        // Create a dedicated HID manager for this connection attempt
         let manager = IOHIDManagerCreate(kCFAllocatorDefault, IOOptionBits(kIOHIDOptionsTypeNone))
         IOHIDManagerSetDeviceMatching(manager, nil)
+        self.pendingManager = manager
 
-        // Schedule on the background thread's run loop
-        guard let runLoop = CFRunLoopGetCurrent() else {
-            Logger.error("Failed to get current run loop")
-            self.updateState { $0.connectionState = .error(.unknown) }
-            return
+        if let runLoop = CFRunLoopGetMain() {
+            IOHIDManagerScheduleWithRunLoop(manager, runLoop, CFRunLoopMode.defaultMode.rawValue)
         }
-        IOHIDManagerScheduleWithRunLoop(manager, runLoop, CFRunLoopMode.defaultMode.rawValue)
 
-        // Register disconnect callback - use static weak reference instead of Unmanaged
-        IOHIDManagerRegisterDeviceRemovalCallback(manager, { context, _, _, device in
-            guard let active = HIDManager.activeInstance else { return }
+        IOHIDManagerRegisterDeviceRemovalCallback(manager, { _, _, _, device in
+            guard let active = HIDManager.getActiveInstance() else { return }
             if device == active.device {
                 active.device = nil
                 Logger.info("HID device disconnected")
-                active.updateState { $0.connectionState = .disconnected }
+                Task { @MainActor in
+                    active.connectionState = .disconnected
+                }
             }
         }, nil)
 
@@ -251,24 +252,98 @@ open class HIDManager: @unchecked Sendable {
         Logger.info("Manager open: 0x\(String(format: "%08X", openResult))")
 
         guard openResult == kIOReturnSuccess else {
-            // Check if this is a permission error
             if openResult == kIOReturnNotPermitted {
-                Logger.error("Input Monitoring permission denied — grant in System Settings > Privacy & Security > Input Monitoring")
-                self.updateState { $0.connectionState = .error(.permissionDenied) }
+                Logger.error("Input Monitoring permission denied")
+                await MainActor.run {
+                    self.connectionState = .error(.permissionDenied)
+                }
             } else {
                 Logger.error("Failed to open HID manager: 0x\(String(format: "%08X", openResult))")
-                self.updateState { $0.connectionState = .error(.connectionFailed) }
+                await MainActor.run {
+                    self.connectionState = .error(.connectionFailed)
+                }
             }
             return
         }
 
-        // Copy and score devices
         guard let allDevices = IOHIDManagerCopyDevices(manager) as? Set<IOHIDDevice> else {
             Logger.error("No HID devices found")
-            self.updateState { $0.connectionState = .error(.deviceNotFound) }
+            await MainActor.run {
+                self.connectionState = .error(.deviceNotFound)
+            }
             return
         }
 
+        let (deviceInfos, candidates) = scanDevices(allDevices)
+
+        await MainActor.run {
+            self.discoveredDevices = deviceInfos.sorted { $0.name < $1.name }
+        }
+
+        Logger.info("=== HID Device Scan: \(deviceInfos.count) devices, \(candidates.count) candidates ===")
+        for info in deviceInfos {
+            let score = scoreDevice(info)
+            let marker = score > 0 ? "[MATCH \(score)]" : ""
+            Logger.info("  \(marker) \(info.name) VID=0x\(String(format: "%04X", info.vendorID)) PID=0x\(String(format: "%04X", info.productID))")
+        }
+
+        var openedDevice: IOHIDDevice?
+        var openedName = ""
+
+        for candidate in candidates {
+            let info = extractDeviceInfo(device: candidate.device)
+            Logger.info("Opening: \(info.name) (score=\(candidate.score))")
+            let result = IOHIDDeviceOpen(candidate.device, IOOptionBits(kIOHIDOptionsTypeNone))
+            if result == kIOReturnSuccess {
+                openedDevice = candidate.device
+                openedName = info.name
+                Logger.info("Successfully opened: \(info.name)")
+
+                let buf = UnsafeMutablePointer<UInt8>.allocate(capacity: reportSize)
+                HIDManager.registerInputCallback(device: candidate.device, buf: buf, size: reportSize)
+
+                break
+            } else {
+                Logger.warning("Failed to open \(info.name): 0x\(String(format: "%08X", result))")
+            }
+        }
+
+        guard let deviceToUse = openedDevice else {
+            Logger.error("No compatible keyboard found")
+            await MainActor.run {
+                self.connectionState = .error(.deviceNotFound)
+            }
+            return
+        }
+
+        await MainActor.run {
+            self.hidManager = self.pendingManager
+            self.device = deviceToUse
+            self.connectionState = .connected(deviceName: openedName)
+        }
+        Logger.info("Connected to: \(openedName)")
+    }
+
+    private nonisolated static func registerInputCallback(device: IOHIDDevice, buf: UnsafeMutablePointer<UInt8>, size: Int) {
+        let callback: IOHIDReportCallback = { _, _, _, _, _, report, reportLength in
+            let length = Int(reportLength)
+            let data = Data(bytes: UnsafeRawPointer(report), count: length)
+            let event = HIDEvent(data: data, timestamp: Date())
+            Task { @MainActor in
+                if let active = HIDManager.getActiveInstance() {
+                    active.eventStream.emit(event)
+                }
+                NotificationCenter.default.post(
+                    name: .hidInputReportReceived,
+                    object: nil,
+                    userInfo: ["report": data]
+                )
+            }
+        }
+        IOHIDDeviceRegisterInputReportCallback(device, buf, size, callback, nil)
+    }
+
+    private nonisolated func scanDevices(_ allDevices: Set<IOHIDDevice>) -> ([HIDDeviceInfo], [(score: Int, device: IOHIDDevice)]) {
         var deviceInfos: [HIDDeviceInfo] = []
         var candidates: [(score: Int, device: IOHIDDevice)] = []
 
@@ -282,92 +357,18 @@ open class HIDManager: @unchecked Sendable {
         }
 
         candidates.sort { $0.score > $1.score }
-        self.updateState { $0.discoveredDevices = deviceInfos.sorted { $0.name < $1.name } }
-
-        Logger.info("=== HID Device Scan: \(deviceInfos.count) devices, \(candidates.count) candidates ===")
-        for info in deviceInfos {
-            let score = scoreDevice(info)
-            let marker = score > 0 ? "[MATCH \(score)]" : ""
-            Logger.info("  \(marker) \(info.name) VID=0x\(String(format: "%04X", info.vendorID)) PID=0x\(String(format: "%04X", info.productID))")
-        }
-
-        // Try to open each candidate
-        var openedDevice: IOHIDDevice?
-        var openedName = ""
-
-        for candidate in candidates {
-            let info = extractDeviceInfo(device: candidate.device)
-            Logger.info("Opening: \(info.name) (score=\(candidate.score))")
-            let result = IOHIDDeviceOpen(candidate.device, IOOptionBits(kIOHIDOptionsTypeNone))
-            if result == kIOReturnSuccess {
-                openedDevice = candidate.device
-                openedName = info.name
-                Logger.info("Successfully opened: \(info.name)")
-
-                // Register input report callback - use static weak reference
-                let buf = UnsafeMutablePointer<UInt8>.allocate(capacity: self.reportSize)
-                self.inputBuffer = buf
-                let callback: IOHIDReportCallback = { ctx, _, _, _, _, report, reportLength in
-                    guard let active = HIDManager.activeInstance else { return }
-                    let length = Int(reportLength)
-                    let data = Data(bytes: UnsafeRawPointer(report), count: length)
-                    DispatchQueue.main.async {
-                        NotificationCenter.default.post(
-                            name: .hidInputReportReceived,
-                            object: active,
-                            userInfo: ["report": data]
-                        )
-                    }
-                }
-                IOHIDDeviceRegisterInputReportCallback(
-                    candidate.device,
-                    buf,
-                    self.reportSize,
-                    callback,
-                    nil
-                )
-
-                break
-            } else {
-                Logger.warning("Failed to open \(info.name): 0x\(String(format: "%08X", result))")
-            }
-        }
-
-        guard let deviceToUse = openedDevice else {
-            Logger.error("No compatible keyboard found")
-            self.updateState { $0.connectionState = .error(.deviceNotFound) }
-            return
-        }
-
-        // Store the manager and device for later use
-        stateLock.withLock {
-            self.hidManager = manager
-            self.device = deviceToUse
-        }
-
-        // Update connection state on main thread
-        self.updateState { $0.connectionState = .connected(deviceName: openedName) }
-        Logger.info("Connected to: \(openedName)")
+        return (deviceInfos, candidates)
     }
 
-    /// Thread-safe state update on main thread
-    private func updateState(_ block: @escaping (HIDManager) -> Void) {
-        if Thread.isMainThread {
-            block(self)
-        } else {
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                block(self)
-                // Wake up the main run loop in case SwiftUI is in a tracking mode
-                CFRunLoopWakeUp(CFRunLoopGetMain())
-            }
-        }
+    @MainActor
+    private func updateState(_ block: @MainActor @Sendable (HIDManager) -> Void) {
+        block(self)
     }
 
     public func disconnect() {
-        hidQueue.async { [weak self] in
+        Task.detached(priority: .userInitiated) { [weak self] in
             guard let self = self else { return }
-            stateLock.withLock {
+            await MainActor.run {
                 if let dev = self.device {
                     IOHIDDeviceClose(dev, IOOptionBits(kIOHIDOptionsTypeNone))
                     self.device = nil
@@ -376,20 +377,17 @@ open class HIDManager: @unchecked Sendable {
                     IOHIDManagerClose(mgr, IOOptionBits(kIOHIDOptionsTypeNone))
                     self.hidManager = nil
                 }
+                self.connectionState = .disconnected
+                self.discoveredDevices = []
             }
-            self.updateState { $0.connectionState = .disconnected }
-            self.updateState { $0.discoveredDevices = [] }
         }
     }
 
     // MARK: - Device Scoring
 
-    /// Scores how likely a device is to be the EvoFox Ronin.
-    /// Higher score = better match. 0 = not a candidate.
-    private func scoreDevice(_ info: HIDDeviceInfo) -> Int {
+    private nonisolated func scoreDevice(_ info: HIDDeviceInfo) -> Int {
         var score = 0
 
-        // Name match (highest priority)
         let lowerName = info.name.lowercased()
         for keyword in knownNameKeywords {
             if lowerName.contains(keyword) {
@@ -397,22 +395,18 @@ open class HIDManager: @unchecked Sendable {
             }
         }
 
-        // Known vendor ID
         if knownVendorIDs.contains(info.vendorID) {
             score += 50
         }
 
-        // Known product ID
         if knownProductIDs.contains(info.productID) {
             score += 30
         }
 
-        // Gaming keyboards often use vendor-specific usage pages for RGB control
         if info.usagePage >= 0xFF00 {
             score += 20
         }
 
-        // Standard keyboard interface
         if info.usagePage == 0x01 && info.usage == 0x06 {
             score += 10
         }
@@ -422,7 +416,7 @@ open class HIDManager: @unchecked Sendable {
 
     // MARK: - Device Info Extraction
 
-    private func extractDeviceInfo(device: IOHIDDevice) -> HIDDeviceInfo {
+    private nonisolated func extractDeviceInfo(device: IOHIDDevice) -> HIDDeviceInfo {
         let name = IOHIDDeviceGetProperty(device, kIOHIDProductKey as CFString) as? String ?? "Unknown"
         let vendorID = (IOHIDDeviceGetProperty(device, kIOHIDVendorIDKey as CFString) as? Int) ?? 0
         let productID = (IOHIDDeviceGetProperty(device, kIOHIDProductIDKey as CFString) as? Int) ?? 0
@@ -451,33 +445,22 @@ open class HIDManager: @unchecked Sendable {
             return true
         }
 
-        // Decode the specific IOKit error
         switch result {
         case kIOReturnNotPermitted:
             Logger.error("Permission denied (0xE00002C2). Grant Input Monitoring in System Settings > Privacy & Security > Input Monitoring.")
-            DispatchQueue.main.async {
-                self.connectionState = .error(.permissionDenied)
-            }
+            connectionState = .error(.permissionDenied)
         case kIOReturnExclusiveAccess:
             Logger.error("Device exclusively claimed by another process (0xE00002C5)")
-            DispatchQueue.main.async {
-                self.connectionState = .error(.connectionFailed)
-            }
+            connectionState = .error(.connectionFailed)
         case kIOReturnBadArgument:
             Logger.error("Bad argument opening HID device (0xE00002C0)")
-            DispatchQueue.main.async {
-                self.connectionState = .error(.connectionFailed)
-            }
+            connectionState = .error(.connectionFailed)
         case kIOReturnNotFound:
             Logger.error("HID device not found (0xE00002C2)")
-            DispatchQueue.main.async {
-                self.connectionState = .error(.deviceNotFound)
-            }
+            connectionState = .error(.deviceNotFound)
         default:
             Logger.error("IOHIDDeviceOpen failed with unknown error: 0x\(String(format: "%08X", result))")
-            DispatchQueue.main.async {
-                self.connectionState = .error(.connectionFailed)
-            }
+            connectionState = .error(.connectionFailed)
         }
         return false
     }
@@ -565,7 +548,6 @@ open class HIDManager: @unchecked Sendable {
 
     // MARK: - Diagnostics
 
-    /// Returns a human-readable report of all discovered devices for troubleshooting
     public func diagnosticsReport() -> String {
         var lines: [String] = []
         lines.append("=== EvoFox Ronin HID Diagnostics ===")

@@ -1,7 +1,7 @@
 import Foundation
 import Carbon
 
-struct KeyCodeMapper {
+struct KeyCodeMapper: Sendable {
     private static let macToScanCode: [UInt16: UInt8] = {
         var map: [UInt16: UInt8] = [:]
 

@@ -18,7 +18,7 @@
 
 import Foundation
 
-public struct KeyboardProfile: Identifiable, Codable, Equatable {
+public struct KeyboardProfile: Identifiable, Codable, Equatable, Sendable {
     public let id: UUID
     public var name: String
     public var rgbSettings: RGBSettings
@@ -30,7 +30,7 @@ public struct KeyboardProfile: Identifiable, Codable, Equatable {
     public var createdAt: Date
     public var modifiedAt: Date
 
-    public enum KnobBehavior: String, Codable, CaseIterable {
+    public enum KnobBehavior: String, Codable, CaseIterable, Sendable {
         case volumeControl = "Volume Control"
         case brightnessControl = "Brightness Control"
         case scrollControl = "Scroll Control"
@@ -38,14 +38,14 @@ public struct KeyboardProfile: Identifiable, Codable, Equatable {
         case custom = "Custom (Macro)"
     }
 
-    public enum PollingRate: Int, Codable, CaseIterable {
+    public enum PollingRate: Int, Codable, CaseIterable, Sendable {
         case hz125 = 125
         case hz250 = 250
         case hz500 = 500
         case hz1000 = 1000
 
         public var displayName: String {
-            return "\(self.rawValue)Hz"
+            return "\(formattedNumber(self.rawValue))Hz"
         }
     }
 
@@ -98,7 +98,7 @@ public struct KeyboardProfile: Identifiable, Codable, Equatable {
 
 // MARK: - Macro Model
 
-public struct KeyboardMacro: Identifiable, Codable, Equatable {
+public struct KeyboardMacro: Identifiable, Codable, Equatable, Sendable {
     public let id: UUID
     public var name: String
     public var triggerKey: KeyPosition?
@@ -107,7 +107,7 @@ public struct KeyboardMacro: Identifiable, Codable, Equatable {
     public var delayBetweenRepeats: UInt16 // milliseconds
     public var isActive: Bool
 
-    public enum MacroEventType: String, Codable, Equatable {
+    public enum MacroEventType: String, Codable, Equatable, Sendable {
         case keyDown
         case keyUp
         case delay
@@ -116,7 +116,7 @@ public struct KeyboardMacro: Identifiable, Codable, Equatable {
         case mouseMove
     }
 
-    public struct MacroEvent: Codable, Equatable {
+    public struct MacroEvent: Codable, Equatable, Sendable {
         public var type: MacroEventType
         public var keyCode: UInt16?
         public var modifiers: [KeyAction.ModifierKey]
@@ -169,6 +169,7 @@ public struct KeyboardMacro: Identifiable, Codable, Equatable {
 
 // MARK: - Profile Manager
 
+@MainActor
 @Observable
 public class ProfileManager {
     public var profiles: [KeyboardProfile] = []

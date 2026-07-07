@@ -47,11 +47,11 @@ struct RGBControlView: View {
             // Header
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("RGB Lighting")
+                    Text("rgb.title")
                         .font(.system(size: 24, weight: .bold, design: .rounded))
                         .vibrantText()
 
-                    Text("Configure per-key RGB lighting with 21 effects")
+                    Text("rgb.subtitle")
                         .font(.system(size: 14, weight: .regular))
                         .vibrantText(isSecondary: true)
                 }
@@ -75,7 +75,7 @@ struct RGBControlView: View {
             // Effect Grid
             LiquidGlassCard {
                 VStack(alignment: .leading, spacing: 16) {
-                    Text("Lighting Effects")
+                    Text("rgb.effects.title")
                         .font(.system(size: 16, weight: .bold, design: .rounded))
                         .vibrantText()
 
@@ -99,14 +99,14 @@ struct RGBControlView: View {
                 // Color Controls
                 LiquidGlassCard {
                     VStack(alignment: .leading, spacing: 16) {
-                        Text("Colors")
+                        Text("rgb.colors.title")
                             .font(.system(size: 16, weight: .bold, design: .rounded))
                             .vibrantText()
 
                         HStack(spacing: 20) {
                             ColorSwatch(
                                 color: primaryColor,
-                                label: "Primary",
+                                label: String(localized: "rgb.colors.primary"),
                                 isSelected: colorPickerTarget == .primary
                             ) {
                                 colorPickerTarget = .primary
@@ -115,7 +115,7 @@ struct RGBControlView: View {
 
                             ColorSwatch(
                                 color: secondaryColor,
-                                label: "Secondary",
+                                label: String(localized: "rgb.colors.secondary"),
                                 isSelected: colorPickerTarget == .secondary
                             ) {
                                 colorPickerTarget = .secondary
@@ -129,13 +129,13 @@ struct RGBControlView: View {
                 // Sliders
                 LiquidGlassCard {
                     VStack(alignment: .leading, spacing: 20) {
-                        Text("Parameters")
+                        Text("rgb.parameters.title")
                             .font(.system(size: 16, weight: .bold, design: .rounded))
                             .vibrantText()
 
                         if selectedEffect.supportsDirection {
                             HStack {
-                                Text("Direction")
+                                Text("rgb.direction.label")
                                     .font(.system(size: 13, weight: .medium))
                                     .vibrantText(isSecondary: true)
                                     .frame(width: 70, alignment: .leading)
@@ -153,14 +153,14 @@ struct RGBControlView: View {
                         LiquidGlassSlider(
                             value: $speed,
                             range: 0...255,
-                            label: "Speed",
+                            label: String(localized: "rgb.speed.label"),
                             icon: "speedometer"
                         )
 
                         LiquidGlassSlider(
                             value: $brightness,
                             range: 0...255,
-                            label: "Brightness",
+                            label: String(localized: "rgb.brightness.label"),
                             icon: "sun.max.fill"
                         )
                     }
@@ -177,7 +177,7 @@ struct RGBControlView: View {
                         ProgressView()
                             .controlSize(.small)
                     } else {
-                        Text("Apply to Keyboard")
+                        Text("rgb.apply.button")
                     }
                 }
                 .buttonStyle(LiquidGlassButtonStyle(isProminent: true, tint: .green))
@@ -201,7 +201,8 @@ struct RGBControlView: View {
                     AppliedToast()
                         .transition(.move(edge: .top).combined(with: .opacity))
                         .onAppear {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            Task { @MainActor in
+                                try? await Task.sleep(nanoseconds: 2_000_000_000)
                                 withAnimation(.spring(Physics.morph)) {
                                     showAppliedToast = false
                                 }
@@ -212,7 +213,8 @@ struct RGBControlView: View {
                     ErrorToast(message: errorMessage)
                         .transition(.move(edge: .top).combined(with: .opacity))
                         .onAppear {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                            Task { @MainActor in
+                                try? await Task.sleep(nanoseconds: 3_000_000_000)
                                 withAnimation(.spring(Physics.morph)) {
                                     showErrorToast = false
                                 }
@@ -230,34 +232,42 @@ struct RGBControlView: View {
         showAppliedToast = false
         showErrorToast = false
 
-        DispatchQueue.global(qos: .userInitiated).async { [self] in
+        let effect = selectedEffect
+        let spd = UInt8(speed)
+        let bri = UInt8(brightness)
+        let pColor = RGBColor(
+            r: UInt8(primaryColor.rgba.red * 255),
+            g: UInt8(primaryColor.rgba.green * 255),
+            b: UInt8(primaryColor.rgba.blue * 255)
+        )
+        let sColor = RGBColor(
+            r: UInt8(secondaryColor.rgba.red * 255),
+            g: UInt8(secondaryColor.rgba.green * 255),
+            b: UInt8(secondaryColor.rgba.blue * 255)
+        )
+        let dir = selectedDirection
+        let enabled = isEnabled
+
+        Task.detached(priority: .userInitiated) { [self] in
             let kbProtocol = KeyboardProtocol()
             let settings = RGBSettings(
-                effect: selectedEffect,
-                speed: UInt8(speed),
-                brightness: UInt8(brightness),
-                primaryColor: RGBColor(
-                    r: UInt8(primaryColor.rgba.red * 255),
-                    g: UInt8(primaryColor.rgba.green * 255),
-                    b: UInt8(primaryColor.rgba.blue * 255)
-                ),
-                secondaryColor: RGBColor(
-                    r: UInt8(secondaryColor.rgba.red * 255),
-                    g: UInt8(secondaryColor.rgba.green * 255),
-                    b: UInt8(secondaryColor.rgba.blue * 255)
-                ),
-                direction: selectedDirection,
-                isEnabled: isEnabled
+                effect: effect,
+                speed: spd,
+                brightness: bri,
+                primaryColor: pColor,
+                secondaryColor: sColor,
+                direction: dir,
+                isEnabled: enabled
             )
 
             let packet = kbProtocol.buildRGBSettingsPacket(settings: settings)
-            let result = hidManager.sendReport(data: packet)
+            let result = await MainActor.run { hidManager.sendReport(data: packet) }
 
-            DispatchQueue.main.async {
+            await MainActor.run {
                 isApplying = false
                 switch result {
                 case .success:
-                    appliedEffect = selectedEffect
+                    appliedEffect = effect
                     withAnimation(.spring(Physics.morph)) {
                         showAppliedToast = true
                     }
@@ -476,32 +486,30 @@ struct ColorPickerSheet: View {
     var body: some View {
         LiquidGlassCard {
             VStack(spacing: 24) {
-                Text("Choose Color")
+                Text("rgb.picker.title")
                     .font(.system(size: 18, weight: .bold, design: .rounded))
                     .vibrantText()
 
-                // Color preview
                 RoundedRectangle(cornerRadius: 12, style: .continuous)
                     .fill(Color(hue: hue, saturation: saturation, brightness: brightness))
                     .frame(height: 80)
                     .shadow(color: Color(hue: hue, saturation: saturation, brightness: brightness).opacity(0.4), radius: 16, x: 0, y: 8)
 
-                // Sliders
                 VStack(spacing: 16) {
-                    LiquidGlassSlider(value: $hue, range: 0...1, label: "Hue", icon: "eyedropper")
-                    LiquidGlassSlider(value: $saturation, range: 0...1, label: "Saturation", icon: "drop.fill")
-                    LiquidGlassSlider(value: $brightness, range: 0...1, label: "Brightness", icon: "sun.max")
+                    LiquidGlassSlider(value: $hue, range: 0...1, label: String(localized: "rgb.picker.hue"), icon: "eyedropper")
+                    LiquidGlassSlider(value: $saturation, range: 0...1, label: String(localized: "rgb.picker.saturation"), icon: "drop.fill")
+                    LiquidGlassSlider(value: $brightness, range: 0...1, label: String(localized: "rgb.brightness.label"), icon: "sun.max")
                 }
 
                 HStack {
-                    Button("Cancel") {
+                    Button("general.cancel") {
                         dismiss()
                     }
                     .buttonStyle(LiquidGlassButtonStyle())
 
                     Spacer()
 
-                    Button("Apply") {
+                    Button("rgb.picker.apply") {
                         color = Color(hue: hue, saturation: saturation, brightness: brightness)
                         dismiss()
                     }
@@ -514,7 +522,6 @@ struct ColorPickerSheet: View {
         .padding(40)
         .onAppear {
             let components = color.rgba
-            // Approximate HSB from RGB
             let r = components.red
             let g = components.green
             let b = components.blue
@@ -545,7 +552,7 @@ struct AppliedToast: View {
             Image(systemName: "checkmark.circle.fill")
                 .foregroundStyle(.green)
 
-            Text("Settings applied to keyboard")
+            Text("rgb.toast.applied")
                 .font(.system(size: 13, weight: .semibold))
                 .vibrantText()
         }
@@ -598,12 +605,12 @@ struct ErrorToast: View {
 extension RGBEffect.Direction {
     var name: String {
         switch self {
-        case .left: return "Left"
-        case .right: return "Right"
-        case .up: return "Up"
-        case .down: return "Down"
-        case .inward: return "In"
-        case .outward: return "Out"
+        case .left: return String(localized: "rgb.direction.left")
+        case .right: return String(localized: "rgb.direction.right")
+        case .up: return String(localized: "rgb.direction.up")
+        case .down: return String(localized: "rgb.direction.down")
+        case .inward: return String(localized: "rgb.direction.in")
+        case .outward: return String(localized: "rgb.direction.out")
         }
     }
 }

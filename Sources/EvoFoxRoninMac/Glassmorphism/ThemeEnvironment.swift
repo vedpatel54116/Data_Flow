@@ -9,8 +9,7 @@ import SwiftUI
 
 // MARK: - Theme Environment Values
 
-@MainActor
-private struct ThemeEnvironmentKey: EnvironmentKey {
+private struct ThemeEnvironmentKey: EnvironmentKey, @unchecked Sendable {
     static let defaultValue = ThemeEnvironment(theme: .dark)
 }
 
@@ -23,8 +22,7 @@ extension EnvironmentValues {
 
 // MARK: - Theme Environment
 
-@MainActor
-public struct ThemeEnvironment {
+public struct ThemeEnvironment: @unchecked Sendable {
     public let theme: AppTheme
     public let backgroundColors: [Color]
     public let contentColor: Color
@@ -139,6 +137,7 @@ public struct ThemeEnvironment {
     }
     
     // Static current for default value
+    @MainActor
     public static var current: ThemeEnvironment {
         ThemeEnvironment(theme: ThemeManager.shared.currentTheme)
     }
@@ -146,7 +145,7 @@ public struct ThemeEnvironment {
 
 // MARK: - Themed Glass Material Wrapper
 
-public struct ThemedGlassMaterial {
+public struct ThemedGlassMaterial: @unchecked Sendable {
     public let nsMaterial: NSVisualEffectView.Material
     public let blendingMode: NSVisualEffectView.BlendingMode
     public let cornerRadius: CGFloat

@@ -33,14 +33,8 @@ struct EvoFoxRoninMacApp: App {
                 .frame(minWidth: 1100, minHeight: 720)
                 .onAppear {
                     Logger.debug("EvoFoxRoninMacApp body onAppear — hidManager instance: \(Unmanaged.passUnretained(hidManager).toOpaque())")
-    }
-}
-
-// MARK: - Notification for Shortcut Cheat Sheet
-
-extension Notification.Name {
-    static let showShortcutCheatSheet = Notification.Name("com.evofox.ronin.showShortcutCheatSheet")
-}
+                }
+        }
         .windowStyle(.hiddenTitleBar)
         .windowResizability(.contentSize)
         .commands {
@@ -145,6 +139,12 @@ extension Notification.Name {
             }
         }
     }
+}
+
+// MARK: - Notification for Shortcut Cheat Sheet
+
+extension Notification.Name {
+    static let showShortcutCheatSheet = Notification.Name("com.evofox.ronin.showShortcutCheatSheet")
 }
 
 // MARK: - App Delegate for Custom Window Setup

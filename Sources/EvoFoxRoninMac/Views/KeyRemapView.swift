@@ -26,11 +26,11 @@ struct KeyRemapView: View {
             // Header
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Key Remapping")
+                    Text("remap.title")
                         .font(.system(size: 24, weight: .bold, design: .rounded))
                         .vibrantText()
 
-                    Text("Click any key to assign a new action")
+                    Text("remap.subtitle")
                         .font(.system(size: 14, weight: .regular))
                         .vibrantText(isSecondary: true)
                 }
@@ -38,11 +38,11 @@ struct KeyRemapView: View {
                 Spacer()
 
                 HStack(spacing: 12) {
-                    Text("\(remappedCount) keys remapped")
+                    Text("remap.keysRemapped \(remappedCount)")
                         .font(.system(size: 12, weight: .medium))
                         .vibrantText(isSecondary: true)
 
-                    Button("Reset All") {
+                    Button("remap.resetAll") {
                         resetAllMappings()
                     }
                     .buttonStyle(LiquidGlassButtonStyle(tint: .orange))
@@ -52,7 +52,7 @@ struct KeyRemapView: View {
             // Visual keyboard for remapping
             LiquidGlassCard {
                 VStack(spacing: 16) {
-                    Text("Click a key to remap it")
+                    Text("remap.clickHint")
                         .font(.system(size: 13, weight: .medium))
                         .vibrantText(isSecondary: true)
 
@@ -71,7 +71,7 @@ struct KeyRemapView: View {
             if let profile = profileManager.activeProfile, !profile.keyMappings.isEmpty {
                 LiquidGlassCard {
                     VStack(alignment: .leading, spacing: 16) {
-                        Text("Current Mappings")
+                        Text("remap.mappings")
                             .font(.system(size: 16, weight: .bold, design: .rounded))
                             .vibrantText()
 
@@ -256,24 +256,24 @@ struct KeyActionSheet: View {
         LiquidGlassCard {
             VStack(spacing: 20) {
                 HStack {
-                    Text("Remap: \(key.defaultLabel)")
+                    Text("remap.action.title \(key.defaultLabel)")
                         .font(.system(size: 18, weight: .bold, design: .rounded))
                         .vibrantText()
 
                     Spacer()
 
-                    Button("Cancel") {
+                    Button("general.cancel") {
                         dismiss()
                     }
                     .buttonStyle(LiquidGlassButtonStyle())
                 }
 
-                Picker("Action Type", selection: $selectedTab) {
-                    Text("Standard Key").tag(0)
-                    Text("Media").tag(1)
-                    Text("Mouse").tag(2)
-                    Text("Macro").tag(3)
-                    Text("Disable").tag(4)
+                Picker("remap.action.type", selection: $selectedTab) {
+                    Text("remap.action.standard").tag(0)
+                    Text("remap.action.media").tag(1)
+                    Text("remap.action.mouse").tag(2)
+                    Text("remap.action.macro").tag(3)
+                    Text("remap.action.disable").tag(4)
                 }
                 .pickerStyle(.segmented)
                 .interactiveAnimation(value: selectedTab)
@@ -297,11 +297,11 @@ struct KeyActionSheet: View {
                                 dismiss()
                             }
                         case 3:
-                            Text("Select a macro from the Macros tab")
+                            Text("remap.action.macroHint")
                                 .vibrantText(isSecondary: true)
                                 .padding(40)
                         case 4:
-                            Button("Disable This Key") {
+                            Button("remap.action.disableKey") {
                                 onSelect(.disabled)
                                 dismiss()
                             }
@@ -373,7 +373,7 @@ struct MouseButtonGrid: View {
     var body: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 130))], spacing: 8) {
             ForEach(KeyAction.MouseButton.allCases, id: \.self) { button in
-                Button("Mouse \(button.rawValue)") {
+                    Button("remap.mouse.button \(button.rawValue)") {
                     onSelect(button)
                 }
                 .buttonStyle(LiquidGlassButtonStyle())

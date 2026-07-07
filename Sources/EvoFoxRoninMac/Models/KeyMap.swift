@@ -17,7 +17,7 @@
 
 import Foundation
 
-public struct KeyPosition: Codable, Hashable, Equatable {
+public struct KeyPosition: Codable, Hashable, Equatable, Sendable {
     public let row: Int
     public let col: Int
 
@@ -27,7 +27,7 @@ public struct KeyPosition: Codable, Hashable, Equatable {
     }
 }
 
-public struct KeyInfo: Identifiable, Codable, Hashable {
+public struct KeyInfo: Identifiable, Codable, Hashable, Sendable {
     public let id = UUID()
     public let position: KeyPosition
     public let scanCode: UInt8
@@ -35,7 +35,7 @@ public struct KeyInfo: Identifiable, Codable, Hashable {
     public let defaultKeyCode: UInt16
     public var size: KeySize
 
-    public enum KeySize: String, Codable, CaseIterable {
+    public enum KeySize: String, Codable, CaseIterable, Sendable {
         case standard = "1u"
         case wide = "1.25u"
         case wider = "1.5u"
@@ -59,7 +59,7 @@ public struct KeyInfo: Identifiable, Codable, Hashable {
     }
 }
 
-public struct KeyMapping: Codable, Equatable, Identifiable {
+public struct KeyMapping: Codable, Equatable, Identifiable, Sendable {
     public let id = UUID()
     public let keyPosition: KeyPosition
     public let keyScanCode: UInt8
@@ -72,7 +72,7 @@ public struct KeyMapping: Codable, Equatable, Identifiable {
     }
 }
 
-public enum KeyAction: Codable, Equatable, Hashable {
+public enum KeyAction: Codable, Equatable, Hashable, Sendable {
     case standardKey(keyCode: UInt16)
     case modifierKey(modifiers: [ModifierKey])
     case mediaKey(media: MediaKey)
@@ -81,7 +81,7 @@ public enum KeyAction: Codable, Equatable, Hashable {
     case layerSwitch(layer: UInt8)
     case disabled
 
-    public enum ModifierKey: String, Codable, CaseIterable {
+    public enum ModifierKey: String, Codable, CaseIterable, Sendable {
         case leftShift = "LShift"
         case rightShift = "RShift"
         case leftCtrl = "LCtrl"
@@ -93,7 +93,7 @@ public enum KeyAction: Codable, Equatable, Hashable {
         case fn = "Fn"
     }
 
-    public enum MediaKey: String, Codable, CaseIterable {
+    public enum MediaKey: String, Codable, CaseIterable, Sendable {
         case playPause = "Play/Pause"
         case stop = "Stop"
         case nextTrack = "Next Track"
@@ -108,7 +108,7 @@ public enum KeyAction: Codable, Equatable, Hashable {
         case launchBrowser = "Launch Browser"
     }
 
-    public enum MouseButton: UInt8, Codable, CaseIterable {
+    public enum MouseButton: UInt8, Codable, CaseIterable, Sendable {
         case left = 1
         case right = 2
         case middle = 3

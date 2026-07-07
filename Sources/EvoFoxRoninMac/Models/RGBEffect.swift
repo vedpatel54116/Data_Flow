@@ -24,7 +24,7 @@
 
 import SwiftUI
 
-public struct RGBEffect: Identifiable, Codable, Equatable, Hashable {
+public struct RGBEffect: Identifiable, Codable, Equatable, Hashable, Sendable {
     public let id: String
     public let effectId: UInt8
     public let name: String
@@ -36,7 +36,7 @@ public struct RGBEffect: Identifiable, Codable, Equatable, Hashable {
     public let supportsColorChange: Bool
     public let description: String
 
-    public enum EffectCategory: String, Codable, CaseIterable {
+    public enum EffectCategory: String, Codable, CaseIterable, Sendable {
         case staticColor = "Static"
         case dynamic = "Dynamic"
         case reactive = "Reactive"
@@ -44,7 +44,7 @@ public struct RGBEffect: Identifiable, Codable, Equatable, Hashable {
         case custom = "Custom"
     }
 
-    public enum Direction: UInt8, Codable, CaseIterable {
+    public enum Direction: UInt8, Codable, CaseIterable, Sendable {
         case left = 0
         case right = 1
         case up = 2
@@ -54,7 +54,7 @@ public struct RGBEffect: Identifiable, Codable, Equatable, Hashable {
     }
 }
 
-public struct RGBColor: Codable, Equatable, Hashable {
+public struct RGBColor: Codable, Equatable, Hashable, Sendable {
     public var r: UInt8
     public var g: UInt8
     public var b: UInt8
@@ -82,7 +82,7 @@ public struct RGBColor: Codable, Equatable, Hashable {
     public static let pink = RGBColor(r: 255, g: 192, b: 203)
 }
 
-public struct RGBSettings: Codable, Equatable {
+public struct RGBSettings: Codable, Equatable, Sendable {
     public var effect: RGBEffect
     public var speed: UInt8
     public var brightness: UInt8

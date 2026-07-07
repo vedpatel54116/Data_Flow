@@ -6,10 +6,10 @@ struct KnobSettingsView: View {
 
     var body: some View {
         VStack(spacing: 16) {
-            Text("Volume Knob Behavior")
+            Text("knob.title")
                 .font(.headline)
 
-            Picker("Behavior", selection: $knobBehavior) {
+            Picker("knob.behavior", selection: $knobBehavior) {
                 ForEach(KeyboardProfile.KnobBehavior.allCases, id: \.self) { behavior in
                     HStack {
                         Image(systemName: behavior.iconName)
@@ -26,8 +26,8 @@ struct KnobSettingsView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
 
             HStack {
-                Button("Cancel") { dismiss() }
-                Button("Save") { dismiss() }
+                Button("general.cancel") { dismiss() }
+                Button("general.save") { dismiss() }
                     .buttonStyle(.borderedProminent)
             }
             .frame(maxWidth: .infinity, alignment: .trailing)
@@ -50,21 +50,21 @@ extension KeyboardProfile.KnobBehavior {
 
     var displayName: String {
         switch self {
-        case .volumeControl: return "Volume Control"
-        case .brightnessControl: return "Brightness"
-        case .scrollControl: return "Scroll"
-        case .zoomControl: return "Zoom"
-        case .custom: return "Custom Action"
+        case .volumeControl: return String(localized: "knob.volume")
+        case .brightnessControl: return String(localized: "knob.brightness")
+        case .scrollControl: return String(localized: "knob.scroll")
+        case .zoomControl: return String(localized: "knob.zoom")
+        case .custom: return String(localized: "knob.custom")
         }
     }
 
     var description: String {
         switch self {
-        case .volumeControl: return "Rotate to adjust system volume"
-        case .brightnessControl: return "Rotate to adjust display brightness"
-        case .scrollControl: return "Rotate to scroll up/down"
-        case .zoomControl: return "Rotate to zoom in/out"
-        case .custom: return "Assign a custom action via macro editor"
+        case .volumeControl: return String(localized: "knob.volume.description")
+        case .brightnessControl: return String(localized: "knob.brightness.description")
+        case .scrollControl: return String(localized: "knob.scroll.description")
+        case .zoomControl: return String(localized: "knob.zoom.description")
+        case .custom: return String(localized: "knob.custom.description")
         }
     }
 }

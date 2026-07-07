@@ -90,7 +90,7 @@ extension NSColor {
 // MARK: - Glass-Friendly Color Palette
 
 /// Colors that work well on glass backgrounds with proper vibrancy
-public enum GlassPalette {
+public enum GlassPalette: Sendable {
     /// Accent colors for primary actions on glass
     public static let accentBlue = Color(hex: 0x0A84FF)
     public static let accentGreen = Color(hex: 0x30D158)
@@ -114,7 +114,7 @@ public enum GlassPalette {
 // MARK: - Gradient Presets
 
 /// Pre-built gradients for animated backgrounds and glass effects
-public enum GlassGradients {
+public enum GlassGradients: Sendable {
     /// Deep space gradient for the main app background
     public static let deepSpace = LinearGradient(
         colors: [

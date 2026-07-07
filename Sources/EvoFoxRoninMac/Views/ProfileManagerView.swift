@@ -32,18 +32,18 @@ struct ProfileManagerView: View {
             // Header
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Profile Manager")
+                    Text("profile.manager.title")
                         .font(.system(size: 24, weight: .bold, design: .rounded))
                         .vibrantText()
 
-                    Text("Save and switch between keyboard configurations")
+                    Text("profile.manager.subtitle")
                         .font(.system(size: 14, weight: .regular))
                         .vibrantText(isSecondary: true)
                 }
 
                 Spacer()
 
-                Button("New Profile") {
+                Button("app.menu.newProfile") {
                     showNewProfileSheet = true
                 }
                 .buttonStyle(GlassButtonStyle(isProminent: true, tint: .green))
@@ -57,11 +57,11 @@ struct ProfileManagerView: View {
                             .font(.system(size: 48))
                             .vibrantText(isSecondary: true)
 
-                        Text("No profiles yet")
+                        Text("profile.empty.title")
                             .font(.system(size: 18, weight: .semibold, design: .rounded))
                             .vibrantText()
 
-                        Text("Create a profile to save your keyboard settings")
+                        Text("profile.empty.hint")
                             .font(.system(size: 14, weight: .regular))
                             .vibrantText(isSecondary: true)
                     }
@@ -95,16 +95,16 @@ struct ProfileManagerView: View {
                 profileManager.setActiveProfile(id: profile.id)
             }
         }
-        .alert("Delete Profile?", isPresented: $showDeleteConfirmation) {
-            Button("Cancel", role: .cancel) {}
-            Button("Delete", role: .destructive) {
+        .alert(String(localized: "profile.delete.title"), isPresented: $showDeleteConfirmation) {
+            Button("general.cancel", role: .cancel) {}
+            Button("general.delete", role: .destructive) {
                 if let profile = profileToDelete {
                     profileManager.deleteProfile(id: profile.id)
                 }
             }
         } message: {
             if let profile = profileToDelete {
-                Text("Are you sure you want to delete '\(profile.name)'? This cannot be undone.")
+                Text(String(localized: "profile.delete.message \(profile.name)"))
             }
         }
     }
@@ -160,7 +160,7 @@ struct ProfileCard: View {
                         .font(.system(size: 15, weight: .semibold))
                         .vibrantText(isSecondary: !isActive)
 
-                    Text("Modified \(formatDate(profile.modifiedAt))")
+                    Text("profile.modified \(formatDate(profile.modifiedAt))")
                         .font(.system(size: 11, weight: .regular))
                         .vibrantText(isSecondary: true)
                 }
@@ -168,7 +168,7 @@ struct ProfileCard: View {
                 Spacer()
 
                 if isActive {
-                    Text("Active")
+                    Text("nav.active")
                         .font(.system(size: 11, weight: .bold, design: .rounded))
                         .foregroundStyle(Color.green)
                         .padding(.horizontal, 10)
@@ -192,24 +192,24 @@ struct ProfileCard: View {
 
                 ProfileDetailItem(
                     icon: "keyboard.fill",
-                    label: "\(profile.keyMappings.count) remaps"
+                    label: String(localized: "profile.remaps \(profile.keyMappings.count)")
                 )
 
                 ProfileDetailItem(
                     icon: "record.circle",
-                    label: "\(profile.macros.count) macros"
+                    label: String(localized: "profile.macros \(profile.macros.count)")
                 )
             }
 
             // Actions
             HStack(spacing: 10) {
-                Button(isActive ? "Active" : "Activate") {
+                Button(isActive ? "nav.active" : "profile.activate") {
                     onActivate()
                 }
                 .buttonStyle(GlassButtonStyle(isProminent: !isActive, tint: .blue))
                 .disabled(isActive)
 
-                Button("Save to KB") {
+                    Button("profile.saveToKB") {
                     onSaveToKeyboard()
                 }
                 .buttonStyle(GlassButtonStyle())
@@ -296,21 +296,21 @@ struct NewProfileSheet: View {
     var body: some View {
         GlassCard {
             VStack(spacing: 20) {
-                Text("New Profile")
+                Text("profile.new.title")
                     .font(.system(size: 18, weight: .bold, design: .rounded))
                     .vibrantText()
 
-                TextField("Profile name", text: $name)
+                TextField(String(localized: "profile.namePlaceholder"), text: $name)
                     .textFieldStyle(.roundedBorder)
                     .frame(width: 260)
 
                 HStack {
-                    Button("Cancel") {
+                    Button("general.cancel") {
                         dismiss()
                     }
                     .buttonStyle(GlassButtonStyle())
 
-                    Button("Create") {
+                    Button("general.create") {
                         if !name.isEmpty {
                             onCreate(name)
                             dismiss()

@@ -14,7 +14,7 @@
 
 import Foundation
 
-public enum LogLevel: String, CaseIterable {
+public enum LogLevel: String, CaseIterable, Sendable {
     case debug = "DEBUG"
     case info = "INFO"
     case warning = "WARN"
@@ -37,8 +37,8 @@ public struct Logger {
         return formatter
     }()
 
-    public static var isEnabled: Bool = true
-    public static var minimumLevel: LogLevel = .debug
+    public static nonisolated(unsafe) var isEnabled: Bool = true
+    public static nonisolated(unsafe) var minimumLevel: LogLevel = .debug
 
     public static func log(_ message: String, level: LogLevel = .info, file: String = #file, line: Int = #line) {
         guard isEnabled else { return }

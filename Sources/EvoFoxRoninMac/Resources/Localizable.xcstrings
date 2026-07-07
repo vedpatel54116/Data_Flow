@@ -1,0 +1,2104 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "app.menu.keyboard": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Keyboard",
+            "state": "translated"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "value": "Tastatur",
+            "state": "translated"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "value": "Clavier",
+            "state": "translated"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "value": "キーボード",
+            "state": "translated"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "value": "键盘",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "app.menu.connect": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Connect",
+            "state": "translated"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "value": "Verbinden",
+            "state": "translated"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "value": "Connecter",
+            "state": "translated"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "value": "接続",
+            "state": "translated"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "value": "连接",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "app.menu.disconnect": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Disconnect",
+            "state": "translated"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "value": "Trennen",
+            "state": "translated"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "value": "Déconnecter",
+            "state": "translated"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "value": "切断",
+            "state": "translated"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "value": "断开",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "app.menu.enableMock": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Enable Mock Mode",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "app.menu.disableMock": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Disable Mock Mode",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "app.menu.submitKeyboard": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Submit Your Keyboard…",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "app.menu.profile": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Profile",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "app.menu.newProfile": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "New Profile",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "app.menu.saveToKeyboard": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Save to Keyboard",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "app.menubar.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "EvoFox Ronin",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "app.menubar.controller": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "EvoFox Ronin Controller",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "app.menubar.openWindow": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Open Window",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "app.menubar.startAtLogin": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Start at Login",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "app.menubar.quit": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Quit",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Connection"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verbindung"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Connexion"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "接続"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "连接"
+          }
+        }
+      }
+    },
+    "connection.status": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Connection Status",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.status.connected %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Connected to %@",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.status.connecting": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Establishing connection...",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.status.scanning": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Scanning for keyboard...",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.status.disconnected": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Keyboard not connected",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.status.connectingShort": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Connecting...",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.status.scanningShort": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Scanning...",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.status.disconnectedShort": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Disconnected",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.details.show": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Show Details",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.details.hide": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Hide Details",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.capabilities": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Capabilities",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.permission.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Input Monitoring permission not granted",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.permission.message": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Go to System Settings > Privacy & Security > Input Monitoring and enable EvoFoxRoninMac",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.permission.button": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Open Settings",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.devices.title %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Discovered HID Devices (%lld)",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.devices.show": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Show",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.devices.hide": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Hide",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.devices.hint": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Look for a device with ★ — that's a candidate match. If your keyboard isn't listed, it may need a different USB cable or port.",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.reconnect.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Reconnect",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.reconnect.description": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Force keyboard reconnection",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.mock.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Mock Mode",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.mock.description": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Test without hardware",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.diagnostics.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Diagnostics",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.diagnostics.show": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Show Full Report",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.diagnostics.hide": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Hide",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.connect": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Connect",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.disconnect": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Disconnect",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.alert.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Input Monitoring Permission Required",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.alert.message": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "EvoFox Ronin needs Input Monitoring permission to communicate with your keyboard.\n\nGo to System Settings > Privacy & Security > Input Monitoring, then enable EvoFoxRoninMac.\n\nYou may need to restart the app after granting permission.",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.alert.button": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Open System Settings",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.troubleshoot.1": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Ensure keyboard is connected via USB-C cable (not wireless)",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.troubleshoot.2": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Grant 'Input Monitoring' permission in System Settings > Privacy & Security",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.troubleshoot.3": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Check 'Discovered HID Devices' above — look for your keyboard's name, VID, and PID",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.troubleshoot.4": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "If your keyboard shows up but isn't connected, note its VID/PID and report it",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.troubleshoot.5": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Enable Mock Mode to test all app features without a physical keyboard",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.device.label": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Device: %@",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.device.model": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Model: EvoFox Ronin TKL",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.device.layout": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Layout: 79-Key Tenkeyless",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.device.switches": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Switches: Outemu Red Silent",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.device.connectionType": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Connection: USB-C Wired",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.device.pollingRate": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Polling Rate: 1000Hz",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "rgb.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "RGB Lighting",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "rgb.subtitle": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Configure per-key RGB lighting with 21 effects",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "rgb.effects.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Lighting Effects",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "rgb.colors.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Colors",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "rgb.colors.primary": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Primary",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "rgb.colors.secondary": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Secondary",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "rgb.parameters.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Parameters",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "rgb.direction.label": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Direction",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "rgb.speed.label": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Speed",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "rgb.brightness.label": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "state": "translated",
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brightness"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Helligkeit"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Luminosité"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "明るさ"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "亮度"
+          }
+        }
+      }
+    },
+    "rgb.zone.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Zone Lighting",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "rgb.zone.effect": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Effect",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "rgb.zone.color": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Color",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "rgb.unsupported": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "RGB lighting not available for this keyboard",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "rgb.unsupported.hint": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Connect a keyboard with RGB support to access lighting controls",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "rgb.apply.button": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apply to Keyboard"
+          }
+        }
+      }
+    },
+    "rgb.direction.left": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Left",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "rgb.direction.right": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Right",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "rgb.direction.up": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Up",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "rgb.direction.down": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Down",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "rgb.direction.in": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "In",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "rgb.direction.out": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Out",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "rgb.toast.applied": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Settings applied to keyboard",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "rgb.picker.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Choose Color",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "rgb.picker.hue": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Hue",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "rgb.picker.saturation": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Saturation",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "rgb.picker.apply": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Apply",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "sidebar.connection": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Connection",
+            "state": "translated"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "value": "Verbindung",
+            "state": "translated"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "value": "Connexion",
+            "state": "translated"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "value": "接続",
+            "state": "translated"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "value": "连接",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "sidebar.rgb": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "RGB Lighting",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "sidebar.remap": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Key Remap",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "sidebar.macros": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Macros",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "sidebar.knob": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Knob",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "sidebar.polling": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Polling Rate",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "sidebar.profiles": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Profiles",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "sidebar.submitKeyboard": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Submit Your Keyboard",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "sidebar.submitKeyboard.help": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Submit Your Keyboard — add a new keyboard definition",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "sidebar.submitKeyboard.hint": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Opens a web form to submit a new keyboard definition for community support",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "sidebar.switchPanel %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Switch to %@ panel",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "nav.active": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Active",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "nav.notActive": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Not active",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "knob.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Volume Knob",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "knob.subtitle": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Configure the physical knob behavior",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "knob.behavior": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Behavior",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "knob.volume": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Volume Control",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "knob.brightness": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Brightness",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "knob.scroll": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Scroll",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "knob.zoom": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Zoom",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "knob.custom": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Custom Action",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "knob.volume.description": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Rotate to adjust system volume",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "knob.brightness.description": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Rotate to adjust display brightness",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "knob.scroll.description": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Rotate to scroll up/down",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "knob.zoom.description": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Rotate to zoom in/out",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "knob.custom.description": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Assign a custom action via macro editor",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "general.cancel": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Cancel",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "general.save": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Save",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "general.delete": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Delete",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "general.create": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Create",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "general.name": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Name:",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "general.noActiveProfile": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "No active profile",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "polling.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Polling Rate",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "polling.subtitle": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Adjust USB polling frequency",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "polling.rate": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Rate",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "polling.hz125": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "125 Hz (8ms) — Lower CPU usage",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "polling.hz250": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "250 Hz (4ms)",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "polling.hz500": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "500 Hz (2ms)",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "polling.hz1000": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "1000 Hz (1ms) — Fastest, default",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "remap.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Key Remapping",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "remap.subtitle": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Click any key to assign a new action",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "remap.keysRemapped %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "%lld keys remapped",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "remap.resetAll": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Reset All",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "remap.clickHint": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Click a key to remap it",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "remap.mappings": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Current Mappings",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "macro.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Macro Programming",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "macro.subtitle": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Record and assign macros to any key",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "macro.new": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "New Macro",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "macro.empty.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "No macros yet",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "macro.empty.hint": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Create a new macro to get started with automation",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "macro.createFirst": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Create First Macro",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "macro.events %lld %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "%lld events • %lldms",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "macro.edit.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Edit Macro",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "macro.namePlaceholder": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Macro name",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "macro.record": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Record",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "macro.stopRecording": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Stop Recording",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "macro.clear": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Clear",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "macro.recordingStatus": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Press keys on your keyboard...",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "macro.idleStatus": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Click Record to capture keystrokes",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "macro.eventsCount %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Events (%lld)",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "macro.repeat %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Repeat: %lldx",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "profile.manager.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Profile Manager",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "profile.manager.subtitle": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Save and switch between keyboard configurations",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "profile.empty.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "No profiles yet",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "profile.empty.hint": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Create a profile to save your keyboard settings",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "profile.modified": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Modified %@",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "profile.remaps %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "%lld remaps",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "profile.macros %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "%lld macros",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "profile.activate": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Activate",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "profile.saveToKB": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Save to KB",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "profile.delete.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Delete Profile?",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "profile.delete.message %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Are you sure you want to delete '%@'? This cannot be undone.",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "profile.new.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "New Profile",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "profile.namePlaceholder": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Profile name",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "remap.action.title %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Remap: %@",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "remap.action.type": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Action Type",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "remap.action.standard": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Standard Key",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "remap.action.media": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Media",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "remap.action.mouse": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Mouse",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "remap.action.macro": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Macro",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "remap.action.disable": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Disable",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "remap.action.macroHint": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Select a macro from the Macros tab",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "remap.action.disableKey": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Disable This Key",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "capability.rgb": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "RGB",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "capability.perKeyRgb": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Per-Key RGB",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "capability.macros": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Macros",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "capability.remap": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Remap",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "capability.knob": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Knob",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "capability.polling": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Polling",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "capability.memory": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Memory",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "capability.nkro": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "NKRO",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "capability.wireless": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Wireless",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "capability.unknown": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Unknown",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "capability.rgb.description": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "RGB lighting supported",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "capability.perKeyRgb.description": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Per-key RGB customization supported",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "capability.macros.description": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Macro programming supported",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "capability.remap.description": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Key remapping supported",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "capability.knob.description": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Media knob supported",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "capability.polling.description": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Polling rate configuration supported",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "capability.memory.description": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Onboard memory for profiles supported",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "capability.nkro.description": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "N-key rollover supported",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "capability.wireless.description": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Wireless connection supported",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "capability.unknown.description": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Unknown capability",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "theme.appearance": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Appearance",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "theme.light": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Light",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "theme.dark": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Dark",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "theme.dim": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Dim",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "theme.help %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Current: %@. Click to cycle.",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "theme.switch %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Switch to %@ theme",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "remap.mouse.button %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Mouse %lld",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "macro.keyCode %@ %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "Key: %@ (%lld)",
+            "state": "translated"
+          }
+        }
+      }
+    },
+    "connection.device.diagnostics": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "value": "VID 0x%X · PID 0x%X · UsagePage 0x%X",
+            "state": "translated"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

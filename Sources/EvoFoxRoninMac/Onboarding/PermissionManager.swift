@@ -1,12 +1,13 @@
 /**
  PermissionManager.swift
-
+ 
  Actor-based manager for macOS Input Monitoring permissions.
  Uses AXIsProcessTrustedWithOptions to check and request permission.
  */
 
-import Foundation
-import ApplicationServices
+@preconcurrency import Foundation
+@preconcurrency import ApplicationServices
+import AppKit
 
 public enum PermissionStatus: Sendable {
     case unknown
@@ -33,8 +34,10 @@ public actor PermissionManager {
 
     /// Request Input Monitoring permission (shows system prompt on first call).
     public func requestInputMonitoring() async -> PermissionStatus {
-        let options = [kAXTrustedCheckOptionPrompt.takeUnretainedValue(): true] as CFDictionary
-        let trusted = AXIsProcessTrustedWithOptions(options)
+        let trusted = await MainActor.run {
+            let options = [kAXTrustedCheckOptionPrompt.takeUnretainedValue(): true] as CFDictionary
+            return AXIsProcessTrustedWithOptions(options)
+        }
         hasRequested = true
 
         if trusted {

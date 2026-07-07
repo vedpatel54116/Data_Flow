@@ -1,8 +1,10 @@
 import XCTest
 @testable import EvoFoxRoninMac
 
+@MainActor
 final class KeyboardProtocolTests: XCTestCase {
-    let kbProtocol = KeyboardProtocol()
+    let mockManager = MockHIDManager()
+    lazy var kbProtocol = EvoFoxRoninProtocol(hidManager: mockManager)
 
     func testBuildPacketReturns64Bytes() {
         let packet = kbProtocol.buildPacket(command: .setRGBEffect(effectId: 0x01))
@@ -73,9 +75,13 @@ final class KeyboardProtocolTests: XCTestCase {
         packet[1] = 0x01
         packet[2] = 0x01
         let response = kbProtocol.decodeResponse(packet: packet)
-        XCTAssertNotNil(response)
-        XCTAssertTrue(response!.isSuccess)
-        XCTAssertEqual(response!.reportID, 0x07)
+        switch response {
+        case .success(let decoded):
+            XCTAssertTrue(decoded.isSuccess)
+            XCTAssertEqual(decoded.reportID, 0x07)
+        case .failure:
+            XCTFail("Expected success")
+        }
     }
 
     func testArraySafeSubscript() {

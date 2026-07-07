@@ -1,0 +1,22 @@
+disabled_rules:
+  - trailing_whitespace
+opt_in_rules:
+  - empty_count
+  - empty_string
+  - force_unwrapping
+  - implicitly_unwrapped_optional
+  - missing_docs
+  - closure_end_indentation
+line_length: 120
+file_length:
+  warning: 400
+  error: 600
+type_body_length:
+  warning: 300
+  error: 400
+function_body_length:
+  warning: 60
+  error: 80
+cyclomatic_complexity:
+  warning: 10
+  error: 20

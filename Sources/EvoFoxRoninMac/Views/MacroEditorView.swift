@@ -32,18 +32,18 @@ struct MacroEditorView: View {
             // Header
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Macro Programming")
+                    Text("macro.title")
                         .font(.system(size: 24, weight: .bold, design: .rounded))
                         .vibrantText()
 
-                    Text("Record and assign macros to any key")
+                    Text("macro.subtitle")
                         .font(.system(size: 14, weight: .regular))
                         .vibrantText(isSecondary: true)
                 }
 
                 Spacer()
 
-                Button("New Macro") {
+                Button("macro.new") {
                     createNewMacro()
                 }
                 .buttonStyle(LiquidGlassButtonStyle(isProminent: true, tint: .green))
@@ -57,16 +57,16 @@ struct MacroEditorView: View {
                             .font(.system(size: 48))
                             .vibrantText(isSecondary: true)
 
-                        Text("No macros yet")
+                        Text("macro.empty.title")
                             .font(.system(size: 18, weight: .semibold, design: .rounded))
                             .vibrantText()
 
-                        Text("Create a new macro to get started with automation")
+                        Text("macro.empty.hint")
                             .font(.system(size: 14, weight: .regular))
                             .vibrantText(isSecondary: true)
                             .multilineTextAlignment(.center)
 
-                        Button("Create First Macro") {
+                        Button("macro.createFirst") {
                             createNewMacro()
                         }
                         .buttonStyle(LiquidGlassButtonStyle(isProminent: true))
@@ -161,7 +161,7 @@ struct MacroCard: View {
                         .font(.system(size: 15, weight: .semibold))
                         .vibrantText(isSecondary: !isSelected)
 
-                    Text("\(macro.events.count) events • \(macro.totalDurationMs)ms")
+                    Text("macro.events \(macro.events.count) \(macro.totalDurationMs)")
                         .font(.system(size: 12, weight: .regular))
                         .vibrantText(isSecondary: true)
                 }
@@ -174,7 +174,7 @@ struct MacroCard: View {
                             .fill(Color.green)
                             .frame(width: 6, height: 6)
                             .shadow(color: Color.green.opacity(0.6), radius: 4, x: 0, y: 0)
-                        Text("Active")
+                        Text("nav.active")
                             .font(.system(size: 11, weight: .medium))
                             .foregroundStyle(Color.green)
                     }
@@ -240,19 +240,19 @@ struct MacroDetailSheet: View {
         LiquidGlassCard {
             VStack(spacing: 20) {
                 HStack {
-                    Text("Edit Macro")
+                    Text("macro.edit.title")
                         .font(.system(size: 18, weight: .bold, design: .rounded))
                         .vibrantText()
 
                     Spacer()
 
-                    Button("Cancel") {
+                    Button("general.cancel") {
                         stopRecording()
                         dismiss()
                     }
                     .buttonStyle(LiquidGlassButtonStyle())
 
-                    Button("Save") {
+                    Button("general.save") {
                         stopRecording()
                         saveMacro()
                     }
@@ -260,18 +260,18 @@ struct MacroDetailSheet: View {
                 }
 
                 HStack {
-                    Text("Name:")
+                    Text("general.name")
                         .font(.system(size: 13, weight: .medium))
                         .vibrantText(isSecondary: true)
                         .frame(width: 60, alignment: .leading)
 
-                    TextField("Macro name", text: $name)
+                    TextField(String(localized: "macro.namePlaceholder"), text: $name)
                         .textFieldStyle(.roundedBorder)
                         .frame(maxWidth: .infinity)
                 }
 
                 HStack {
-                    Button(isRecording ? "Stop Recording" : "Record") {
+                    Button(isRecording ? "macro.stopRecording" : "macro.record") {
                         if isRecording {
                             stopRecording()
                         } else {
@@ -282,7 +282,7 @@ struct MacroDetailSheet: View {
                     .buttonStyle(LiquidGlassButtonStyle(isProminent: isRecording, tint: isRecording ? .red : .blue))
                     .shadow(color: isRecording ? Color.red.opacity(0.4) : .clear, radius: isRecording ? 12 : 0, x: 0, y: 4)
 
-                    Button("Clear") {
+                    Button("macro.clear") {
                         events.removeAll()
                     }
                     .buttonStyle(LiquidGlassButtonStyle())
@@ -298,14 +298,14 @@ struct MacroDetailSheet: View {
                                 .opacity(isRecording ? 1 : 0)
                                 .animation(.easeInOut(duration: 0.5).repeatForever(autoreverses: true), value: isRecording)
                         }
-                        Text(isRecording ? "Press keys on your keyboard..." : "Click Record to capture keystrokes")
+                        Text(isRecording ? "macro.recordingStatus" : "macro.idleStatus")
                             .font(.system(size: 12, weight: .regular))
                             .vibrantText(isSecondary: true)
                     }
                 }
 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Events (\(events.count))")
+                    Text("macro.eventsCount \(events.count)")
                         .font(.system(size: 14, weight: .bold, design: .rounded))
                         .vibrantText()
 
@@ -322,7 +322,7 @@ struct MacroDetailSheet: View {
 
                 HStack {
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("Repeat: \(Int(repeatCount))x")
+                        Text("macro.repeat \(Int(repeatCount))")
                             .font(.system(size: 12, weight: .medium))
                             .vibrantText(isSecondary: true)
 
@@ -333,7 +333,7 @@ struct MacroDetailSheet: View {
 
                     HStack(spacing: 12) {
                         LiquidToggle(isOn: $isActive, tintColor: .green, size: .small)
-                        Text("Active")
+                        Text("nav.active")
                             .font(.system(size: 13, weight: .medium))
                             .vibrantText(isSecondary: true)
                     }
@@ -361,7 +361,7 @@ struct MacroDetailSheet: View {
                     keyCode: UInt16(scanCode),
                     delayMs: events.isEmpty ? 0 : elapsed
                 )
-                DispatchQueue.main.async {
+                Task { @MainActor in
                     events.append(macroEvent)
                 }
             }
@@ -409,7 +409,7 @@ struct EventRow: View {
                 .frame(width: 80, alignment: .leading)
 
             if let keyCode = event.keyCode {
-                Text("Key: \(KeyCodeLibrary.name(for: keyCode)) (\(keyCode))")
+                Text("macro.keyCode \(KeyCodeLibrary.name(for: keyCode)) \(keyCode)")
                     .font(.system(size: 12, weight: .regular))
                     .vibrantText(isSecondary: true)
             }

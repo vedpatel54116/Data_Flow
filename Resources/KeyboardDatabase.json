@@ -1,0 +1,35 @@
+{
+  "version": "1.0.0",
+  "keyboards": [
+    {
+      "id": "evofox.ronin.v1",
+      "manufacturer": "EvoFox",
+      "model": "Ronin",
+      "vendorID": "0x1234",
+      "productID": "0x5678",
+      "capabilities": ["rgbLighting", "perKeyRGB", "macroProgramming", "keyRemapping", "mediaKnob", "pollingRateConfig", "onboardMemory"],
+      "layout": "fullSize",
+      "protocolVersion": 1,
+      "maxMacros": 5,
+      "maxProfiles": 3,
+      "rgbZones": 104,
+      "firmwareURL": "https://evofox.com/firmware/ronin",
+      "communityVerified": true
+    },
+    {
+      "id": "razer.blackwidow.v3",
+      "manufacturer": "Razer",
+      "model": "BlackWidow V3",
+      "vendorID": "0x1532",
+      "productID": "0x024E",
+      "capabilities": ["rgbLighting", "perKeyRGB", "macroProgramming"],
+      "layout": "fullSize",
+      "protocolVersion": 2,
+      "maxMacros": 0,
+      "maxProfiles": 1,
+      "rgbZones": 104,
+      "firmwareURL": null,
+      "communityVerified": false
+    }
+  ]
+}

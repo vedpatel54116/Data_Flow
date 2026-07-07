@@ -26,7 +26,7 @@ struct ConnectionView: View {
                         statusIcon
 
                         VStack(alignment: .leading, spacing: 4) {
-                            Text("Connection Status")
+                            Text("connection.status")
                                 .font(.system(size: 20, weight: .bold, design: .rounded))
                                 .vibrantText()
 
@@ -58,7 +58,7 @@ struct ConnectionView: View {
                         .padding(.top, 8)
                     }
 
-                    Button(showDetails ? "Hide Details" : "Show Details") {
+                    Button(showDetails ? "connection.details.hide" : "connection.details.show") {
                         withAnimation(.spring(Physics.morph)) {
                             showDetails.toggle()
                         }
@@ -74,11 +74,11 @@ struct ConnectionView: View {
                                 .foregroundStyle(.orange)
 
                             VStack(alignment: .leading, spacing: 4) {
-                                Text("Input Monitoring permission not granted")
+                                Text("connection.permission.title")
                                     .font(.system(size: 13, weight: .semibold))
                                     .vibrantText()
 
-                                Text("Go to System Settings > Privacy & Security > Input Monitoring and enable EvoFoxRoninMac")
+                                Text("connection.permission.message")
                                     .font(.system(size: 11, weight: .regular))
                                     .vibrantText(isSecondary: true)
                                     .fixedSize(horizontal: false, vertical: true)
@@ -86,7 +86,7 @@ struct ConnectionView: View {
 
                             Spacer()
 
-                            Button("Open Settings") {
+                            Button("connection.permission.button") {
                                 if let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_ListenEvent") {
                                     NSWorkspace.shared.open(url)
                                 }
@@ -111,13 +111,13 @@ struct ConnectionView: View {
                 LiquidGlassCard {
                     VStack(alignment: .leading, spacing: 16) {
                         HStack {
-                            Text("Discovered HID Devices (\(hidManager.discoveredDevices.count))")
+                            Text("connection.devices.title \(hidManager.discoveredDevices.count)")
                                 .font(.system(size: 16, weight: .bold, design: .rounded))
                                 .vibrantText()
 
                             Spacer()
 
-                            Button(showDiscoveredDevices ? "Hide" : "Show") {
+                            Button(showDiscoveredDevices ? "connection.devices.hide" : "connection.devices.show") {
                                 withAnimation(.spring(Physics.morph)) {
                                     showDiscoveredDevices.toggle()
                                 }
@@ -134,7 +134,7 @@ struct ConnectionView: View {
                             }
                         }
 
-                        Text("Look for a device with ★ — that's a candidate match. If your keyboard isn't listed, it may need a different USB cable or port.")
+                        Text("connection.devices.hint")
                             .font(.system(size: 11, weight: .regular))
                             .vibrantText(isSecondary: true)
                             .padding(.top, 8)
@@ -146,19 +146,20 @@ struct ConnectionView: View {
             HStack(spacing: 16) {
                 QuickActionCard(
                     icon: "arrow.clockwise",
-                    title: "Reconnect",
-                    description: "Force keyboard reconnection"
+                    title: String(localized: "connection.reconnect.title"),
+                    description: String(localized: "connection.reconnect.description")
                 ) {
                     hidManager.disconnect()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    Task { @MainActor in
+                        try? await Task.sleep(nanoseconds: 500_000_000)
                         hidManager.connect()
                     }
                 }
 
                 QuickActionCard(
                     icon: "eye.fill",
-                    title: "Mock Mode",
-                    description: "Test without hardware"
+                    title: String(localized: "connection.mock.title"),
+                    description: String(localized: "connection.mock.description")
                 ) {
                     hidManager.enableMockMode()
                 }
@@ -168,13 +169,13 @@ struct ConnectionView: View {
             LiquidGlassCard(material: .floating) {
                 VStack(alignment: .leading, spacing: 16) {
                     HStack {
-                        Text("Diagnostics")
+                        Text("connection.diagnostics.title")
                             .font(.system(size: 18, weight: .bold, design: .rounded))
                             .vibrantText()
 
                         Spacer()
 
-                        Button(showDiagnostics ? "Hide" : "Show Full Report") {
+                        Button(showDiagnostics ? "connection.diagnostics.hide" : "connection.diagnostics.show") {
                             withAnimation(.spring(Physics.morph)) {
                                 showDiagnostics.toggle()
                             }
@@ -200,23 +201,23 @@ struct ConnectionView: View {
                     VStack(alignment: .leading, spacing: 10) {
                         TroubleshootingRow(
                             step: "1",
-                            text: "Ensure keyboard is connected via USB-C cable (not wireless)"
+                            text: String(localized: "connection.troubleshoot.1")
                         )
                         TroubleshootingRow(
                             step: "2",
-                            text: "Grant 'Input Monitoring' permission in System Settings > Privacy & Security"
+                            text: String(localized: "connection.troubleshoot.2")
                         )
                         TroubleshootingRow(
                             step: "3",
-                            text: "Check 'Discovered HID Devices' above — look for your keyboard's name, VID, and PID"
+                            text: String(localized: "connection.troubleshoot.3")
                         )
                         TroubleshootingRow(
                             step: "4",
-                            text: "If your keyboard shows up but isn't connected, note its VID/PID and report it"
+                            text: String(localized: "connection.troubleshoot.4")
                         )
                         TroubleshootingRow(
                             step: "5",
-                            text: "Enable Mock Mode to test all app features without a physical keyboard"
+                            text: String(localized: "connection.troubleshoot.5")
                         )
                     }
                 }
@@ -225,15 +226,15 @@ struct ConnectionView: View {
             Spacer(minLength: 40)
         }
         .frame(maxWidth: 720)
-        .alert("Input Monitoring Permission Required", isPresented: $showPermissionAlert) {
-            Button("Open System Settings") {
+        .alert(String(localized: "connection.alert.title"), isPresented: $showPermissionAlert) {
+            Button("connection.alert.button") {
                 if let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_ListenEvent") {
                     NSWorkspace.shared.open(url)
                 }
             }
-            Button("Cancel", role: .cancel) {}
+            Button("general.cancel", role: .cancel) {}
         } message: {
-            Text("EvoFox Ronin needs Input Monitoring permission to communicate with your keyboard.\n\nGo to System Settings > Privacy & Security > Input Monitoring, then enable EvoFoxRoninMac.\n\nYou may need to restart the app after granting permission.")
+            Text("connection.alert.message")
         }
         .onChange(of: hidManager.connectionState) { _, newState in
             if case .error(.permissionDenied) = newState {
@@ -275,7 +276,7 @@ struct ConnectionView: View {
     private var connectionActionButton: some View {
         switch hidManager.connectionState {
         case .disconnected, .error:
-            Button("Connect") {
+            Button("connection.connect") {
                 hidManager.connect()
             }
             .buttonStyle(LiquidGlassButtonStyle(isProminent: true, tint: .green))
@@ -286,7 +287,7 @@ struct ConnectionView: View {
                 .progressViewStyle(CircularProgressViewStyle(tint: .white))
 
         case .connected:
-            Button("Disconnect") {
+            Button("connection.disconnect") {
                 hidManager.disconnect()
             }
             .buttonStyle(LiquidGlassButtonStyle(tint: .red))
@@ -316,13 +317,13 @@ struct ConnectionView: View {
     private var statusDescription: String {
         switch hidManager.connectionState {
         case .connected(let name):
-            return "Connected to \(name)"
+            return String(localized: "connection.status.connected \(name)")
         case .connecting:
-            return "Establishing connection..."
+            return String(localized: "connection.status.connecting")
         case .scanning:
-            return "Scanning for keyboard..."
+            return String(localized: "connection.status.scanning")
         case .disconnected:
-            return "Keyboard not connected"
+            return String(localized: "connection.status.disconnected")
         case .error(let error):
             return error.description
         }
@@ -332,12 +333,12 @@ struct ConnectionView: View {
         switch hidManager.connectionState {
         case .connected(let name):
             return [
-                "Device: \(name)",
-                "Model: EvoFox Ronin TKL",
-                "Layout: 79-Key Tenkeyless",
-                "Switches: Outemu Red Silent",
-                "Connection: USB-C Wired",
-                "Polling Rate: 1000Hz"
+                String(localized: "connection.device.label \(name)"),
+                String(localized: "connection.device.model"),
+                String(localized: "connection.device.layout"),
+                String(localized: "connection.device.switches"),
+                String(localized: "connection.device.connectionType"),
+                String(localized: "connection.device.pollingRate")
             ]
         default:
             return nil
@@ -378,7 +379,7 @@ struct DeviceInfoRow: View {
                     .font(.system(size: 12, weight: isMatch ? .semibold : .medium))
                     .vibrantText(isSecondary: !isMatch)
 
-                Text("VID 0x\(String(format: "%04X", device.vendorID)) · PID 0x\(String(format: "%04X", device.productID)) · UsagePage 0x\(String(format: "%04X", device.usagePage))")
+                Text(String(format: String(localized: "connection.device.diagnostics"), device.vendorID, device.productID, device.usagePage))
                     .font(.system(size: 10, weight: .regular, design: .monospaced))
                     .vibrantText(isSecondary: true)
             }

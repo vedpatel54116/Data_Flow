@@ -133,7 +133,7 @@ extension View {
 // MARK: - Matched Geometry for Liquid Transitions
 
 /// Namespace for glass morphing transitions between views
-public struct GlassNamespace {
+public struct GlassNamespace: Sendable {
     public static let sidebar = "sidebar"
     public static let panel = "panel"
     public static let control = "control"

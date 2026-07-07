@@ -90,7 +90,8 @@ struct KeyboardVisualizer: View {
 
     private func triggerRipple(at position: KeyPosition) {
         rippleOrigin = position
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        Task { @MainActor in
+            try? await Task.sleep(nanoseconds: 1_000_000_000)
             rippleOrigin = nil
         }
     }

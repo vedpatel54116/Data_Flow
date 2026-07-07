@@ -6,10 +6,10 @@ struct PollingRateView: View {
 
     var body: some View {
         VStack(spacing: 16) {
-            Text("Polling Rate")
+            Text("polling.title")
                 .font(.headline)
 
-            Picker("Rate", selection: $pollingRate) {
+            Picker("polling.rate", selection: $pollingRate) {
                 ForEach(KeyboardProfile.PollingRate.allCases, id: \.self) { rate in
                     Text(rate.displayName).tag(rate)
                 }
@@ -22,8 +22,8 @@ struct PollingRateView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
 
             HStack {
-                Button("Cancel") { dismiss() }
-                Button("Save") { dismiss() }
+                Button("general.cancel") { dismiss() }
+                Button("general.save") { dismiss() }
                     .buttonStyle(.borderedProminent)
             }
             .frame(maxWidth: .infinity, alignment: .trailing)
@@ -36,10 +36,10 @@ struct PollingRateView: View {
 extension KeyboardProfile.PollingRate {
     var pollingDescription: String {
         switch self {
-        case .hz125: return "125 Hz (8ms) — Lower CPU usage"
-        case .hz250: return "250 Hz (4ms)"
-        case .hz500: return "500 Hz (2ms)"
-        case .hz1000: return "1000 Hz (1ms) — Fastest, default"
+        case .hz125: return String(localized: "polling.hz125")
+        case .hz250: return String(localized: "polling.hz250")
+        case .hz500: return String(localized: "polling.hz500")
+        case .hz1000: return String(localized: "polling.hz1000")
         }
     }
 }

@@ -39,43 +39,9 @@
 
 import Foundation
 
-public enum KeyboardCommand {
-    case setRGBEffect(effectId: UInt8)
-    case setRGBColor(r: UInt8, g: UInt8, b: UInt8)
-    case setRGBSpeed(speed: UInt8)
-    case setRGBBrightness(brightness: UInt8)
-    case setRGBDirection(direction: UInt8)
-    case setRGBMode(mode: UInt8)
-    case remapKey(scanCode: UInt8, targetKeyCode: UInt16)
-    case setMacro(macroId: UInt8, events: [KeyboardMacro.MacroEvent])
-    case saveProfile(profileId: UInt8)
-    case loadProfile(profileId: UInt8)
-    case factoryReset
-    case setKnobBehavior(behavior: UInt8)
-    case setPollingRate(rate: UInt8)
-
-    public var commandId: UInt8 {
-        switch self {
-        case .setRGBEffect:         return 0x01
-        case .setRGBColor:          return 0x02
-        case .setRGBSpeed:          return 0x03
-        case .setRGBBrightness:     return 0x04
-        case .setRGBDirection:      return 0x05
-        case .setRGBMode:           return 0x06
-        case .remapKey:             return 0x10
-        case .setMacro:             return 0x20
-        case .saveProfile:          return 0x30
-        case .loadProfile:          return 0x31
-        case .factoryReset:         return 0xFF
-        case .setKnobBehavior:      return 0x40
-        case .setPollingRate:       return 0x41
-        }
-    }
-}
-
 // MARK: - Packet Builder
 
-public class KeyboardProtocol {
+public class KeyboardProtocol: @unchecked Sendable {
     private let reportSize: Int = 64
 
     public init() {}
@@ -258,17 +224,6 @@ public class KeyboardProtocol {
             commandType: commandType,
             data: Array(packet[3...])
         )
-    }
-}
-
-public struct KeyboardResponse {
-    public let reportID: UInt8
-    public let status: UInt8
-    public let commandType: UInt8
-    public let data: [UInt8]
-
-    public var isSuccess: Bool {
-        status == 0x00 || status == 0x01
     }
 }
 
